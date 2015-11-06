@@ -4,6 +4,8 @@
 
 suppressWarnings(suppressMessages(library(RODBC)))
 suppressWarnings(suppressMessages(library(sqldf)))
+suppressMessages(suppressMessages(library(dplyr)))
+suppressMessages(suppressMessages(library(knitr)))
 
 setwd("~/Github/BK_Brew/Database") #Change directory to Brewing directory
 
