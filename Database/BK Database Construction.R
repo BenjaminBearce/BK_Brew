@@ -3,8 +3,8 @@
 #-----------------------------------------------------------#
 
 #Load data collected from EZ Brew spreadsheet
-suppressMessages(library(gdata)) #Suppress loading info on Excel reading package
-suppressMessages(library(sqldf))
+suppressWarnings(suppressMessages(library(gdata))) #Suppress loading info on Excel reading package
+suppressWarnings(suppressMessages(library(sqldf)))
 
 setwd("./Database")
 Grains_Info <- read.xls("Brewing_Constants.xlsx",sheet = "Grains", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
@@ -71,12 +71,12 @@ dbSendQuery(conn = db,
 #Styles
 dbSendQuery(conn = db,
             "CREATE TABLE Styles
-            (Ingredients CHAR,
-            Value DOUBLE,
-            PPG DOUBLE,
-            SRM DOUBLE,
-            EZWaterCode INT,
-            FlavorProfile TEXT)")
+            (GeneralStyle CHAR,
+            Styles CHAR,
+            GravityRange CHAR,
+            StyleFinal CHAR,
+            BitterRange CHAR,
+            SRMRange CHAR)")
 
 
 dbListFields(db, "Grains")    # The columns in a table
@@ -88,7 +88,6 @@ dbWriteTable(conn = db, name = "Hops", value = Hops_Info, overwrite = F, append 
 dbWriteTable(conn = db, name = "Spices", value = Spices_Info, overwrite = F, append = T)
 dbWriteTable(conn = db, name = "Yeast", value = Yeast_Info, overwrite = F, append = T)
 dbWriteTable(conn = db, name = "Styles", value = Style_Info, overwrite = F, append = T)
-
 
 
 

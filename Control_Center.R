@@ -2,10 +2,10 @@
 #---------------- Official BK Brew Software ----------------#
 #-----------------------------------------------------------#
 
-suppressMessages(library(RODBC)) 
-suppressMessages(library(sqldf))
+suppressWarnings(suppressMessages(library(RODBC)))
+suppressWarnings(suppressMessages(library(sqldf)))
 
-setwd("C:/Users/Benjamin/Documents/R/Brewing") #Change directory to Brewing directory
+setwd("~/Github/BK_Brew/Database") #Change directory to Brewing directory
 
 #-------------------- Initialize Data ----------------------#
 db <- dbConnect(SQLite(), dbname="Ingredients.sqlite")
@@ -28,28 +28,34 @@ cat("--Welcome to the BK Brewery Beer Brewing guide!--
 #--------------------------------------------------#
 
 # Start by choosing a style to get style constants needed to design beer
-source("~/Brewing/BK_Software")
-chooseStyle()
+source("~/Github/BK_Brew/Main_Sections/BeerType.R")
+beerType()
 
 # Create the grain bill 
-source("~/Brewing/BK_Software")
-grainBill()
+source("~/Github/BK_Brew/Main_Sections/Fermentables.R")
+fermentables()
 
-# Determine how much water you will need
-source("~/Brewing/BK_Software")
-waterVolumes()
+# Determine yeast strain to use
+source("~/Github/BK_Brew/Main_Sections/Yeast.R")
+yeast()
 
-# Choose hops
-source("~/Brewing/BK_Software")
+# Create desired mash schedule
+source("~/Github/BK_Brew/Main_Sections/Mash.R")
+mash()
+
+# Determine water volumes
+source("~/Github/BK_Brew/Main_Sections/Water.R")
+water()
+
+# pH and chemistry calculations
+source("~/Github/BK_Brew/Main_Sections/pH.R")
+pHCorrection()
+
+# Aroma/ bittering hops calculations and IBUs
+source("~/Github/BK_Brew/Main_Sections/Hops.R")
 hops()
 
-
-
-
-
-
-
-
+# Create Brew Day Schedule!
 
 
 
