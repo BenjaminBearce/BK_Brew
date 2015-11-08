@@ -31,7 +31,7 @@ cat("--Welcome to the BK Brewery Beer Brewing guide!--
 
 # Start by choosing a style to get style constants needed to design beer
 source("~/Github/BK_Brew/Main_Sections/BeerType.R")
-beerType()
+beerSelection <- beerType()
 
 # Create the grain bill 
 source("~/Github/BK_Brew/Main_Sections/Fermentables.R")
