@@ -1,8 +1,8 @@
 #-----------------------------------------------------------#
-#------------ Choose Yeast and Starter Regime --------------#
+#--------------------- Decoction Mash ----------------------#
 #-----------------------------------------------------------#
 
-yeastStrainCalculations <- function(){
+mashdecoction <- function(){
 
-return(yeastInfo)
+return(mashSchedule)
 }

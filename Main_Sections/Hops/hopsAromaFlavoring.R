@@ -1,8 +1,8 @@
 #-----------------------------------------------------------#
-#------------ Choose Yeast and Starter Regime --------------#
+#---------------- Aroma and Flavoring Hops -----------------#
 #-----------------------------------------------------------#
 
-yeastStrainCalculations <- function(){
+hopsAromaFlavoring <- function(){
 
-return(yeastInfo)
+return(hopsAromaFlavor)
 }

@@ -31,7 +31,7 @@ and understand the process at the same time.
 #--------------------------------------------------#
 
 # Start by choosing a style to get style constants needed to design beer
-source("~/Github/BK_Brew/Main_Sections/BeerType.R")
+source("~/Github/BK_Brew/Main_Sections/BeerType.R") #
 beerSelection <- beerType()
 
 # Create the grain bill 

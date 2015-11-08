@@ -1,8 +1,8 @@
 #-----------------------------------------------------------#
-#------------ Choose Yeast and Starter Regime --------------#
+#--------------------- Bittering Hops ----------------------#
 #-----------------------------------------------------------#
 
-yeastStrainCalculations <- function(){
+hopsBittering <- function(){
 
-return(yeastInfo)
+return(hopsBittering)
 }

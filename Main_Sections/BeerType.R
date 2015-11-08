@@ -53,7 +53,9 @@ temp[selection,] %>%
         kable(row.names = FALSE) %>% 
         print()
 # Pass selection back to Control Center
-return(temp[selection,] %>% select(Style = Styles, GravityRange, StyleFinal, BitterRange, SRMRange))
+grainBill <- temp[selection,] %>% select(Style = Styles, GravityRange, StyleFinal, BitterRange, SRMRange)
+
+return(grainBill)
 
 }
 

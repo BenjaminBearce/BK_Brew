@@ -1,8 +1,8 @@
 #-----------------------------------------------------------#
-#------------ Choose Yeast and Starter Regime --------------#
+#---------------------- Water Volumes ----------------------#
 #-----------------------------------------------------------#
 
-yeastStrainCalculations <- function(){
+waterVolumes <- function(){
 
-return(yeastInfo)
+return(waterVolumes)
 }

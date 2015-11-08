@@ -1,8 +1,8 @@
 #-----------------------------------------------------------#
-#------------ Choose Yeast and Starter Regime --------------#
+#---------------------- Two Step Mash ----------------------#
 #-----------------------------------------------------------#
 
-yeastStrainCalculations <- function(){
+mashTwoStep <- function(){
 
-return(yeastInfo)
+return(mashSchedule)
 }
