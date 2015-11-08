@@ -21,11 +21,12 @@ Styles <- dbReadTable(db, "Styles")
 #-----------------------------------------------------------#
 
 #--------------------- Welcome Screen ----------------------#
-cat("--Welcome to the BK Brewery Beer Brewing guide!--
-    ----------------------------------------------------------------
-    -The point is to help you make beer
-    and understand the process at the same time.
-    ----------------------------------------------------------------
+cat("
+--Welcome to the BK Brewery Beer Brewing guide!--
+----------------------------------------------------------------
+-The point is to help you make beer
+and understand the process at the same time.
+----------------------------------------------------------------
     ")
 #--------------------------------------------------#
 
@@ -34,30 +35,26 @@ source("~/Github/BK_Brew/Main_Sections/BeerType.R")
 beerSelection <- beerType()
 
 # Create the grain bill 
-source("~/Github/BK_Brew/Main_Sections/Fermentables.R")
+source("~/Github/BK_Brew/Main_Sections/Fermentables/Fermentables.R")
 grainBill <- fermentables()
 
 # Determine yeast strain to use
-source("~/Github/BK_Brew/Main_Sections/Yeast.R")
-yeast()
+source("~/Github/BK_Brew/Main_Sections/Yeast/Yeast.R")
+yeastSelection <- yeast()
 
 # Create desired mash schedule
-source("~/Github/BK_Brew/Main_Sections/Mash.R")
-mash()
+source("~/Github/BK_Brew/Main_Sections/Mash/Mash.R")
+mashSchedule <- mash()
 
 # Determine water volumes
-source("~/Github/BK_Brew/Main_Sections/Water.R")
-water()
-
-# pH and chemistry calculations
-source("~/Github/BK_Brew/Main_Sections/pH.R")
-pHCorrection()
+source("~/Github/BK_Brew/Main_Sections/Water/Water.R")
+waterDetailss <- water()
 
 # Aroma/ bittering hops calculations and IBUs
-source("~/Github/BK_Brew/Main_Sections/Hops.R")
-hops()
+source("~/Github/BK_Brew/Main_Sections/Hops/Hops.R")
+hopsList <- hops()
 
-# Create Brew Day Schedule!
+# Create Brew Day Schedule Next!
 
 
 

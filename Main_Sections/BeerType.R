@@ -20,7 +20,7 @@ Choose a number...
 Styles$GeneralStyle %>% sort() %>% unique() %>% print()
 
 # Take user selection
-selection <- readLines(n = 1)
+selection <- scan(n = 1)
 
 # Show Selection 
 style <- Styles$GeneralStyle %>% sort() %>% unique() %>% .[as.numeric(selection)]
@@ -44,7 +44,7 @@ temp <- filter(Styles, GeneralStyle == style) %>%
 print(kable(temp))
 
 # Take selection
-selection <- readLines(n = 1)
+selection <- scan(n = 1)
 
 # Show Sub-style Selection
 cat("You Chose:")
