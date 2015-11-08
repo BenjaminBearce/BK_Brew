@@ -14,12 +14,13 @@ Hops_Info   <- read.xls("Brewing_Constants.xlsx",sheet = "Hops", stringsAsFactor
 Yeast_Info  <- read.xls("Brewing_Constants.xlsx",sheet = "Yeast", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
 Style_Info  <- read.xls("Brewing_Constants.xlsx",sheet = "Styles", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
 Spices_Info  <- read.xls("Brewing_Constants.xlsx",sheet = "Spices", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
+SystemSpecific_Info  <- read.xls("Brewing_Constants.xlsx",sheet = "SystemSpecificInformation", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
 
-db <- dbConnect(SQLite(), dbname="Ingredients.sqlite")
+dbIngredients <- dbConnect(SQLite(), dbname="Ingredients.sqlite")
 
 #Create Tables
 #Grains
-dbSendQuery(conn = db,
+dbSendQuery(conn = dbIngredients,
             "CREATE TABLE Grains
             (Ingredients CHAR,
             Value DOUBLE,
@@ -28,7 +29,7 @@ dbSendQuery(conn = db,
             EZWaterCode INT,
             FlavorProfile TEXT)")
 #Extracts
-dbSendQuery(conn = db,
+dbSendQuery(conn = dbIngredients,
             "CREATE TABLE Extracts
             (Ingredients CHAR,
             Value DOUBLE,
@@ -37,7 +38,7 @@ dbSendQuery(conn = db,
             EZWaterCode INT,
             FlavorProfile TEXT)")
 #Adjuncts
-dbSendQuery(conn = db,
+dbSendQuery(conn = dbIngredients,
             "CREATE TABLE Adjuncts
             (Ingredients CHAR,
             Value DOUBLE,
@@ -46,7 +47,7 @@ dbSendQuery(conn = db,
             EZWaterCode INT,
             FlavorProfile TEXT)")
 #Hops
-dbSendQuery(conn = db,
+dbSendQuery(conn = dbIngredients,
             "CREATE TABLE Hops
             (Hops CHAR,
             Value DOUBLE,
@@ -57,7 +58,7 @@ dbSendQuery(conn = db,
             Storage CHAR,
             AdditionalInformation_History TEXT)")
 #Yeast
-dbSendQuery(conn = db,
+dbSendQuery(conn = dbIngredients,
             "CREATE TABLE Yeast
             (YeastStrain CHAR,
             Value DOUBLE,
@@ -69,7 +70,7 @@ dbSendQuery(conn = db,
             RecommendedStyles TEXT,
             Brewery CHAR)")
 #Styles
-dbSendQuery(conn = db,
+dbSendQuery(conn = dbIngredients,
             "CREATE TABLE Styles
             (GeneralStyle CHAR,
             Styles CHAR,
@@ -78,16 +79,34 @@ dbSendQuery(conn = db,
             BitterRange CHAR,
             SRMRange CHAR)")
 
+dbBKBrewHouse <- dbConnect(SQLite(), dbname="BKBrewHouse.sqlite")
+#Create Tables
+#System Specific Information
+dbSendQuery(conn = dbBKBrewHouse,
+            "CREATE TABLE SystemSpecificInformation
+            (BatchSize_Gal DOUBLE,
+            EvapRate_Percent_per_hr DOUBLE,
+            ShrinkageFromCooling_Percent DOUBLE,
+            BrewHouseEfficiency_Percent DOUBLE,
+            WeightOfMashTun_lb DOUBLE,
+            ThermalMassOfMAshTun_btu_per_lb_DegreeF DOUBLE,
+            BoilKettleDeadSpace_Gal DOUBLE,
+            LauterTunDeadSpace_Gal DOUBLE)")
 
-dbListFields(db, "Grains")    # The columns in a table
-#Load in *.csv data
-dbWriteTable(conn = db, name = "Grains", value = Grains_Info, overwrite = F, append = T)
-dbWriteTable(conn = db, name = "Extracts", value = Extracts_Info, overwrite = F, append = T)
-dbWriteTable(conn = db, name = "Adjuncts", value = Adjuncts_Info, overwrite = F, append = T)
-dbWriteTable(conn = db, name = "Hops", value = Hops_Info, overwrite = F, append = T)
-dbWriteTable(conn = db, name = "Spices", value = Spices_Info, overwrite = F, append = T)
-dbWriteTable(conn = db, name = "Yeast", value = Yeast_Info, overwrite = F, append = T)
-dbWriteTable(conn = db, name = "Styles", value = Style_Info, overwrite = F, append = T)
+
+#dbListFields(db, "Grains")    # The columns in a table; for a refernece if you need it later
+
+#Load in *.csv data to Ingredients Database
+dbWriteTable(conn = dbIngredients, name = "Grains", value = Grains_Info, overwrite = F, append = T)
+dbWriteTable(conn = dbIngredients, name = "Extracts", value = Extracts_Info, overwrite = F, append = T)
+dbWriteTable(conn = dbIngredients, name = "Adjuncts", value = Adjuncts_Info, overwrite = F, append = T)
+dbWriteTable(conn = dbIngredients, name = "Hops", value = Hops_Info, overwrite = F, append = T)
+dbWriteTable(conn = dbIngredients, name = "Spices", value = Spices_Info, overwrite = F, append = T)
+dbWriteTable(conn = dbIngredients, name = "Yeast", value = Yeast_Info, overwrite = F, append = T)
+dbWriteTable(conn = dbIngredients, name = "Styles", value = Style_Info, overwrite = F, append = T)
+
+#Load in *.csv data to BKBrew House Database
+dbWriteTable(conn = dbBKBrewHouse, name = "SystemSpecificInformation", value = SystemSpecific_Info, overwrite = F, append = T)
 
 
 

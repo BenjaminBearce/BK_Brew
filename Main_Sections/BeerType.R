@@ -6,7 +6,7 @@ beerType <- function(){
         
 cat("
 --     First we need to choose the beer we want to make!     --
----------------------------------------------------------------\n\n")
+---------------------------------------------------------------\n")
 
 cat("
 Which style do you want to focus your attention?
@@ -47,8 +47,10 @@ print(kable(temp))
 selection <- readLines(n = 1)
 
 # Show Sub-style Selection
+cat("You Chose:")
 temp[selection,] %>%
         select(Style = Styles, GravityRange, StyleFinal, BitterRange, SRMRange) %>%
+        kable(row.names = FALSE) %>% 
         print()
 # Pass selection back to Control Center
 return(temp[selection,] %>% select(Style = Styles, GravityRange, StyleFinal, BitterRange, SRMRange))

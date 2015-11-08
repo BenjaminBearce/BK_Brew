@@ -35,7 +35,7 @@ beerSelection <- beerType()
 
 # Create the grain bill 
 source("~/Github/BK_Brew/Main_Sections/Fermentables.R")
-fermentables()
+grainBill <- fermentables()
 
 # Determine yeast strain to use
 source("~/Github/BK_Brew/Main_Sections/Yeast.R")
