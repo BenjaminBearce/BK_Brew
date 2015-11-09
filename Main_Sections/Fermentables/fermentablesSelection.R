@@ -40,7 +40,7 @@ selections <- filter(Grains,Ingredients %in% grains)
 #Add percentage column
 selections <- mutate(selections, Percentage = 0)
 cat("Now we need to choose the percentages we want for each grain.\n\n")
-browser()
+
 TotalPercentage <- 0
 while(TotalPercentage != 100){
         for(grain in selections$Ingredients){
