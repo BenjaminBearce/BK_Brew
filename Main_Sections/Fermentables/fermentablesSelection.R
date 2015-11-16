@@ -14,7 +14,7 @@ cat("Look at the grains available and find the relevant grains you would like.\n
 
 View(Grains)
 
-cat("Start entering in selections in numerical form and we will review it:
+cat("Start entering selections in numerical form and we will review it:
 keep entering numbers until you are done, then just press enter...")
 # Take user selection
 selections <- scan()

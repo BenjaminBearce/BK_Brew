@@ -6,6 +6,7 @@ suppressWarnings(suppressMessages(library(RODBC)))
 suppressWarnings(suppressMessages(library(sqldf)))
 suppressMessages(suppressMessages(library(dplyr)))
 suppressMessages(suppressMessages(library(knitr)))
+suppressMessages(suppressMessages(library(stringr)))
 
 setwd("~/Github/BK_Brew/Database") #Change directory to Brewing directory
 
@@ -18,6 +19,9 @@ Hops <- dbReadTable(db, "Hops")
 Spices <- dbReadTable(db, "Spices")
 Yeast <- dbReadTable(db, "Yeast")
 Styles <- dbReadTable(db, "Styles")
+
+db <- dbConnect(SQLite(), dbname="BKBrewHouse.sqlite")
+BrewHouseConstants <- dbReadTable(db, "SystemSpecificInformation")
 #-----------------------------------------------------------#
 
 #--------------------- Welcome Screen ----------------------#
