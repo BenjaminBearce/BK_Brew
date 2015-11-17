@@ -18,7 +18,7 @@ if(grains == FALSE){
         OG <- mean(c(lowerRange,higherRange))/1000+1
         
         totalGravity <- OG*5.5 #OG*Gal
-        browser()
+        
         grains <- grains %>% 
                   mutate(IngredientGravity = Percentage*totalGravity) %>%
                   mutate(lbsNeeded = IngredientGravity/(((PPG-1)*1000)*BrewHouseConstants$BrewHouseEfficiency_Percent/100))
