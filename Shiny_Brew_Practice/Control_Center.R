@@ -97,8 +97,10 @@ ui <- fluidPage(
                                     value = 0)
                 ),
                 column(width = 2,
-                       textOutput(outputId = "OG")
+                       strong("Lbs"),
+                       textOutput(outputId = "OG1")
                 )
+                
             ),
             fluidRow(
                 column(width = 2,
@@ -110,6 +112,9 @@ ui <- fluidPage(
                        numericInput(inputId = "IngredientPercent2",
                                     label = NULL,
                                     value = 0)
+                ),
+                column(width = 2,
+                       textOutput(outputId = "OG2")
                 )
             ),
             fluidRow(
@@ -122,6 +127,9 @@ ui <- fluidPage(
                        numericInput(inputId = "IngredientPercent3",
                                     label = NULL,
                                     value = 0)
+                ),
+                column(width = 2,
+                       textOutput(outputId = "OG3")
                 )
             ),
             fluidRow(
@@ -134,6 +142,9 @@ ui <- fluidPage(
                        numericInput(inputId = "IngredientPercent4",
                                     label = NULL,
                                     value = 0)
+                ),
+                column(width = 2,
+                       textOutput(outputId = "OG4")
                 )
             ),
             fluidRow(
@@ -146,6 +157,9 @@ ui <- fluidPage(
                        numericInput(inputId = "IngredientPercent5",
                                     label = NULL,
                                     value = 0)
+                ),
+                column(width = 2,
+                       textOutput(outputId = "OG5")
                 )
             ),
 # Fermentables Display --------------------
@@ -189,13 +203,8 @@ ui <- fluidPage(
 server <- function(input, output){
 # Fermentables Output --------------------
 # Fermentables1 --------------------
-    output$Ingredients <- renderText({
-        input$Ingredients
-    })
-    output$IngredientPercent <- renderText({
-        input$IngredientPercent
-    })#...display  more if you really need
-    output$OG <- renderText({
+
+    output$OG1 <- renderText({
         OG <- as.character(subset(Styles, Styles == input$Style, select = GravityRange))
         OG <- OG %>%
             str_split("-") %>%
@@ -216,6 +225,89 @@ server <- function(input, output){
             select(lbsNeeded) %>% as.character()
     })
     
+    output$OG2 <- renderText({
+            OG <- as.character(subset(Styles, Styles == input$Style, select = GravityRange))
+            OG <- OG %>%
+                    str_split("-") %>%
+                    unlist() %>%
+                    as.numeric()
+            
+            lowerRange <- (OG[1]-1)*1000
+            higherRange <- OG[2]
+            
+            OG <- mean(c(lowerRange,higherRange)) #/1000+1
+            
+            totalGravity <- OG*input$batchSize #OG*Gal
+            
+            grains <- Grains %>% 
+                    filter(Ingredients == input$Ingredients2) %>% 
+                    mutate(IngredientGravity = input$IngredientPercent2/100*totalGravity) %>%
+                    mutate(lbsNeeded = IngredientGravity/((PPG-1)*1000*input$sysEfficiency/100)) %>%
+                    select(lbsNeeded) %>% as.character()
+    })
+    
+    output$OG3 <- renderText({
+            OG <- as.character(subset(Styles, Styles == input$Style, select = GravityRange))
+            OG <- OG %>%
+                    str_split("-") %>%
+                    unlist() %>%
+                    as.numeric()
+            
+            lowerRange <- (OG[1]-1)*1000
+            higherRange <- OG[2]
+            
+            OG <- mean(c(lowerRange,higherRange)) #/1000+1
+            
+            totalGravity <- OG*input$batchSize #OG*Gal
+            
+            grains <- Grains %>% 
+                    filter(Ingredients == input$Ingredients3) %>% 
+                    mutate(IngredientGravity = input$IngredientPercent3/100*totalGravity) %>%
+                    mutate(lbsNeeded = IngredientGravity/((PPG-1)*1000*input$sysEfficiency/100)) %>%
+                    select(lbsNeeded) %>% as.character()
+    })
+    
+    output$OG4 <- renderText({
+            OG <- as.character(subset(Styles, Styles == input$Style, select = GravityRange))
+            OG <- OG %>%
+                    str_split("-") %>%
+                    unlist() %>%
+                    as.numeric()
+            
+            lowerRange <- (OG[1]-1)*1000
+            higherRange <- OG[2]
+            
+            OG <- mean(c(lowerRange,higherRange)) #/1000+1
+            
+            totalGravity <- OG*input$batchSize #OG*Gal
+            
+            grains <- Grains %>% 
+                    filter(Ingredients == input$Ingredients4) %>% 
+                    mutate(IngredientGravity = input$IngredientPercent4/100*totalGravity) %>%
+                    mutate(lbsNeeded = IngredientGravity/((PPG-1)*1000*input$sysEfficiency/100)) %>%
+                    select(lbsNeeded) %>% as.character()
+    })
+    
+    output$OG5 <- renderText({
+            OG <- as.character(subset(Styles, Styles == input$Style, select = GravityRange))
+            OG <- OG %>%
+                    str_split("-") %>%
+                    unlist() %>%
+                    as.numeric()
+            
+            lowerRange <- (OG[1]-1)*1000
+            higherRange <- OG[2]
+            
+            OG <- mean(c(lowerRange,higherRange)) #/1000+1
+            
+            totalGravity <- OG*input$batchSize #OG*Gal
+            
+            grains <- Grains %>% 
+                    filter(Ingredients == input$Ingredients5) %>% 
+                    mutate(IngredientGravity = input$IngredientPercent5/100*totalGravity) %>%
+                    mutate(lbsNeeded = IngredientGravity/((PPG-1)*1000*input$sysEfficiency/100)) %>%
+                    select(lbsNeeded) %>% as.character()
+    })
     
     
 # Yeast Output --------------------
