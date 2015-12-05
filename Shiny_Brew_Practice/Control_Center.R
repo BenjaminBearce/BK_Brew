@@ -19,8 +19,8 @@ Yeast <- dbReadTable(db, "Yeast")
 Styles <- dbReadTable(db, "Styles")
 setwd("~/Github/BK_Brew/Shiny_Brew_Practice") #Change directory to Shiny_Brew_Practice
 # Load UI Components --------------------
-source("FermentablesUI.R", local = TRUE)
-
+source("~/Github/BK_Brew/Shiny_Brew_Practice/Fermentables/FermentablesUI.R", local = TRUE)
+source("~/Github/BK_Brew/Shiny_Brew_Practice/Yeast/YeastUI.R", local = TRUE)
 
 # UI --------------------
 ui <- fluidPage(
@@ -90,14 +90,9 @@ ui <- fluidPage(
     tabsetPanel(type = "tabs",
 # Fermentables --------------------
 
-        X(),
+        fermentablesUI(),
 # Yeast --------------------
-        tabPanel("Yeast",
-            selectInput(inputId = "Yeast",
-                        label = "Yeast",
-                        choices =  Yeast$YeastStrain),
-            textOutput(outputId = "Yeast")
-        ),
+        yeastUI(),
 # Hops --------------------
         tabPanel("Hops", 
                  selectInput(inputId = "Hops",

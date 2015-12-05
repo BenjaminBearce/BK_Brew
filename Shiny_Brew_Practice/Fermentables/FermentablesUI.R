@@ -1,5 +1,6 @@
 # Fermentables UI
 
+fermentablesUI <- function(){
 tabPanel("Fermentables",
          fluidRow(
                  column(width = 2,
@@ -79,3 +80,4 @@ tabPanel("Fermentables",
                  )
          )
 )
+}
