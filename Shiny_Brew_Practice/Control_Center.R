@@ -17,6 +17,10 @@ Hops <- dbReadTable(db, "Hops")
 Spices <- dbReadTable(db, "Spices")
 Yeast <- dbReadTable(db, "Yeast")
 Styles <- dbReadTable(db, "Styles")
+setwd("~/Github/BK_Brew/Shiny_Brew_Practice") #Change directory to Shiny_Brew_Practice
+# Load UI Components --------------------
+source("FermentablesUI.R", local = TRUE)
+
 
 # UI --------------------
 ui <- fluidPage(
@@ -82,109 +86,25 @@ ui <- fluidPage(
         
     ),
 # Tabset Panel --------------------
+
     tabsetPanel(type = "tabs",
 # Fermentables --------------------
-        tabPanel("Fermentables",
-            fluidRow(
-                column(width = 2,
-                       selectInput(inputId = "Ingredients1",
-                                label = "Ingredients",
-                                choices =  c(Grains$Ingredients, Extracts$Ingredients, Adjuncts$Ingredients))
-                ),
-                column(width = 2,
-                       numericInput(inputId = "IngredientPercent1",
-                                    label = "Percent",
-                                    value = 0)
-                ),
-                column(width = 2,
-                       strong("Lbs"),
-                       textOutput(outputId = "OG1")
-                )
-                
-            ),
-            fluidRow(
-                column(width = 2,
-                       selectInput(inputId = "Ingredients2",
-                                   label = NULL,
-                                   choices =  c(Grains$Ingredients, Extracts$Ingredients, Adjuncts$Ingredients))
-                ),
-                column(width = 2,
-                       numericInput(inputId = "IngredientPercent2",
-                                    label = NULL,
-                                    value = 0)
-                ),
-                column(width = 2,
-                       textOutput(outputId = "OG2")
-                )
-            ),
-            fluidRow(
-                column(width = 2,
-                       selectInput(inputId = "Ingredients3",
-                                   label = NULL,
-                                   choices =  c(Grains$Ingredients, Extracts$Ingredients, Adjuncts$Ingredients))
-                ),
-                column(width = 2,
-                       numericInput(inputId = "IngredientPercent3",
-                                    label = NULL,
-                                    value = 0)
-                ),
-                column(width = 2,
-                       textOutput(outputId = "OG3")
-                )
-            ),
-            fluidRow(
-                column(width = 2,
-                       selectInput(inputId = "Ingredients4",
-                                   label = NULL,
-                                   choices =  c(Grains$Ingredients, Extracts$Ingredients, Adjuncts$Ingredients))
-                ),
-                column(width = 2,
-                       numericInput(inputId = "IngredientPercent4",
-                                    label = NULL,
-                                    value = 0)
-                ),
-                column(width = 2,
-                       textOutput(outputId = "OG4")
-                )
-            ),
-            fluidRow(
-                column(width = 2,
-                       selectInput(inputId = "Ingredients5",
-                                   label = NULL,
-                                   choices =  c(Grains$Ingredients, Extracts$Ingredients, Adjuncts$Ingredients))
-                ),
-                column(width = 2,
-                       numericInput(inputId = "IngredientPercent5",
-                                    label = NULL,
-                                    value = 0)
-                ),
-                column(width = 2,
-                       textOutput(outputId = "OG5")
-                )
-            ),
-# Fermentables Display --------------------
-            
-            fluidRow(
-                column(width = 2,
-                       textOutput(outputId = "Ingredients")
-                ),
-                column(width = 2,
-                       textOutput(outputId = "IngredientPercent")
-                )
-            )#more if needed
-        ),
+
+        X(),
 # Yeast --------------------
         tabPanel("Yeast",
             selectInput(inputId = "Yeast",
                         label = "Yeast",
                         choices =  Yeast$YeastStrain),
-            textOutput(outputId = "Yeast")),
+            textOutput(outputId = "Yeast")
+        ),
 # Hops --------------------
         tabPanel("Hops", 
                  selectInput(inputId = "Hops",
                              label = "Hops",
                              choices =  Hops$Hops),
-                 textOutput(outputId = "Hops")),
+                 textOutput(outputId = "Hops")
+        ),
 # Mash --------------------
         tabPanel("Mash", 
             #Plot Temp Mash Schedule
