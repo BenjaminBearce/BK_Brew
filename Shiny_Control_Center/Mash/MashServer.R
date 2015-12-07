@@ -16,4 +16,12 @@ mashServer <- function(input, output){
                         finNum = 5.0*input$MashNum1
                 }
         })
+        
+        output$MashH20 <- renderText({
+                out1 <- input$MashThick1*10.15
+        })
+        
+        output$MashTemp <- renderText({
+                out2 <- input$ProteinRest1 - input$GrainTemp1
+        })
 }
