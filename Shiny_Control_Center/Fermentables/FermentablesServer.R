@@ -105,7 +105,7 @@ fermentablesServer <- function(input, output){
                         mutate(lbsNeeded = IngredientGravity/((PPG-1)*1000*input$sysEfficiency/100)) %>%
                         select(lbsNeeded) %>% as.character()
         })
-        data <- reactive({
+        totalGrain <- reactive({
                 #Style OG
                 OG <- as.character(subset(Styles, Styles == input$Style, select = GravityRange))
                 OG <- OG %>%
@@ -148,7 +148,7 @@ fermentablesServer <- function(input, output){
                 
                 lbs <- as.numeric(grains1+grains2+grains3+grains4+grains5)
         })
-        output$data <- renderText({
-                data()
+        output$totalGrain <- renderText({
+                totalGrain()
         })
 }
