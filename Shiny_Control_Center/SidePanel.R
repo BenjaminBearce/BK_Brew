@@ -1,7 +1,7 @@
 # Side Panel
 
 sidePanel <- function() {
-    sidebarPanel(
+    sidebarPanel(style = "background-color: #BED4C9",
         h4("What Beer?"),
         textInput(inputId = "Brewer", label = "Brewer",value = "Big Kitchen"),
         textInput(inputId = "RecipeName", label = "Recipe Name",value = ""),

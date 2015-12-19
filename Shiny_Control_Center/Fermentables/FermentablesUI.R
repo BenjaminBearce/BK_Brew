@@ -16,6 +16,10 @@ tabPanel("Fermentables",
                  column(width = 2,
                         strong("Lbs"),
                         textOutput(outputId = "OG1")
+                 ),
+                 column(width = 2,
+                        strong("Total Grains (Lbs)"),
+                        textOutput(outputId = "data")
                  )
                  
          ),

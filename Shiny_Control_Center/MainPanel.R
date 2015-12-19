@@ -1,7 +1,9 @@
 # Main Panel
 
 panelMain <- function(){
+    
     mainPanel(
+        wellPanel(style = "background-color: #BED4C9",
         h4("System Specific Constants"),
         fluidRow(
             column(width = 5,
@@ -46,5 +48,7 @@ panelMain <- function(){
             )
         ),
         width = 10
-    )
+        )
+     )
+    
 }

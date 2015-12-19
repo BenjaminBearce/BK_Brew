@@ -41,11 +41,15 @@ source("~/Github/BK_Brew/Shiny_Control_Center/Fermentation/FermentationServer.R"
 ui <- fluidPage(
     titlePanel("BK Brewery", windowTitle = "BK Brewery"),
 # Sidebar Layout --------------------
-    sidebarLayout(
+    wellPanel(style = "background-color: #0EAE20",
+            sidebarLayout(
+                
 # Sidebar Panel --------------------
-        sidePanel(),
+                sidePanel(),
 # Main Panel --------------------
-        panelMain()
+                panelMain()
+                
+            )
     ),
 # Tabset Panel --------------------
 
