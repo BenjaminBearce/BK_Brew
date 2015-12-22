@@ -1,7 +1,7 @@
 # Water Server
 
 waterServer <- function(input, output){
-        output$WatertotalGrain <- renderText({
+        output$waterTotalGrain <- renderText({
                 totalGrain()
         })
         

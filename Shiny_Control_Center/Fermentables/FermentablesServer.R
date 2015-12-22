@@ -148,7 +148,7 @@ fermentablesServer <- function(input, output){
                 
                 lbs <- as.numeric(grains1+grains2+grains3+grains4+grains5)
         })
-        output$totalGrain <- renderText({
+        output$fermentablesTotalGrain <- renderText({
                 totalGrain()
        })
    

@@ -19,7 +19,7 @@ tabPanel("Fermentables",
                  ),
                  column(width = 2,
                         strong("Total Grains (Lbs)"),
-                        textOutput(outputId = "totalGrain")
+                        textOutput(outputId = "fermentablesTotalGrain")
                  )
                  
          ),
