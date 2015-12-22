@@ -6,7 +6,8 @@ tabPanel("Hops",
                   selectInput(inputId = "Hops",
                               label = "Hops",
                               choices =  Hops$Hops),
-                  textOutput(outputId = "Hops")
+                  textOutput(outputId = "Hops"),
+                  textOutput("HopstotalGrain")
          )
 )
 }

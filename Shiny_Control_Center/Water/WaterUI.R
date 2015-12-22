@@ -1,5 +1,7 @@
 # Water UI
 
 waterUI <- function(){
-        tabPanel("Water", "Water")
+        tabPanel(title = "Water",
+                 textOutput("WatertotalGrain")
+        )
 }
