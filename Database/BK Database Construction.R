@@ -27,7 +27,8 @@ dbSendQuery(conn = dbIngredients,
             PPG DOUBLE,
             SRM DOUBLE,
             EZWaterCode INT,
-            FlavorProfile TEXT)")
+            FlavorProfile TEXT,
+            DP INT)")
 #Extracts
 dbSendQuery(conn = dbIngredients,
             "CREATE TABLE Extracts

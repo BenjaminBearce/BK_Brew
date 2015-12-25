@@ -3,30 +3,24 @@
 waterUI <- function(){
         tabPanel(title = "Water",
                  sidebarLayout(
-                         sidebarPanel(style = "background-color: #BED4C9",
-                                      "side panel"
+                         sidebarPanel(style = "background-color: #BED4C9", width = 2,
+                                      strong("Batch Size (Gal):"),
+                                      wellPanel(textOutput(outputId = "waterBatchSize")),
+                                      strong("Grain Bill (Lbs):"),
+                                      wellPanel(textOutput(outputId = "waterTotalGrain")),
+                                      strong("Equip. Losses (Gal):"),
+                                      wellPanel(textOutput(outputId = "waterEquipLoss")),
+                                      numericInput(inputId = "mashThickness",
+                                                   label = "Mash Thickness (Qts/Lb):",
+                                                   value = 1.25),
+                                      numericInput(inputId = "grainAbsorptionFactor",
+                                                   label = "Grain Absorption Factor (Gal/Lb):",
+                                                   value = .125)
+                                      
                          ),
-                         mainPanel(style = "background-color: #BED4C9",
-                                   "main panel")
-#                  fluidRow(
-#                          column(width = 2,
-#                                 strong("Batch Size (Gal):"),
-#                                 wellPanel(textOutput(outputId = "waterBatchSize"))
-#                          ),
-#                          column(width = 2,
-#                                 strong("Grain Bill (Lbs):"),
-#                                 wellPanel(textOutput(outputId = "waterTotalGrain"))
-#                          ),
-#                          column(width = 2,
-#                                 strong("Equip. Losses (Gal):"),
-#                                 wellPanel(textOutput(outputId = "waterEquipLoss"))
-#                          ),
-#                          column(width = 2,
-#                                 numericInput(inputId = "mashThickness",
-#                                              label = "Mash Thickness (Qts/Lb):",
-#                                              value = 1.25)
-#                          )
-#                  )
+                         mainPanel(
+                                   plotOutput(outputId = "waterGraph"))
+
                  )
         )
 }

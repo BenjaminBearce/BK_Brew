@@ -39,6 +39,7 @@ source("~/Github/BK_Brew/Shiny_Control_Center/Fermentation/FermentationServer.R"
 
 # UI --------------------
 ui <- fluidPage(
+# Header --------------------
     titlePanel("BK Brewery", windowTitle = "BK Brewery"),
     imageOutput("image"),
 # Sidebar Layout --------------------
@@ -74,7 +75,7 @@ ui <- fluidPage(
 )
 # Server --------------------
 server <- function(input, output){
-        
+# Header Image Output -------------------- 
         output$image <- renderImage({
                 return(list(
                         src = "Brew.png",
