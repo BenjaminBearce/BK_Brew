@@ -19,6 +19,11 @@ waterServer <- function(input, output){
         
         output$waterGraph <- renderPlot({
                 GL <- totalGrain()*input$grainAbsorptionFactor
+                lauterLoss <- input$lauterTunDeadSpace
+                mashLoss <- input$mashTunDeadSpace
+                kettleLoss <- input$kettleDeadSpace
+                fermentationLoss <- input$fermentationTankLoss
+                
                 EL <- input$kettleDeadSpace + input$lauterTunDeadSpace + input$mashTunDeadSpace + input$fermentationTankLoss
                 BS <- input$batchSize
                 EvL <- BS*((input$boilTime/60)*(input$evap/100)/(1-(input$boilTime/60)*(input$evap/100)))

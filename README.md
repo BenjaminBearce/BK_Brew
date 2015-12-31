@@ -3,7 +3,6 @@ Kyle Schluns and Ben Bearce's take on essential components of making craft home 
 
 How to use:  
 1) Database folder contains essential constants and information necessary to design home brew.  
-2) Brew_Flow power point explains the high level organization and design of software.  
-3) Control_Center.R is currently the main R script that controls the gathering of necessary information  
-   and execution of R functions in the order specified by Brew_Flow.  
-4) Main_Sections is the folder where the major brewing sections are housed.  
+2) MainPanel.R and SidePanel.R are apart of the brew system constants and are for the user to customize. 
+3) App folder contains app files; use Control_Center.R to execute app. Once open highlight all code and run.
+4) Archive folder contains the old app with out Shiny R as user interface. There may still be useful code in there.
