@@ -30,7 +30,7 @@ waterServer <- function(input, output){
                 BS <- input$batchSize
                 EvL <- BS*((input$boilTime/60)*(input$evap/100)/(1-(input$boilTime/60)*(input$evap/100)))
                 TWN <- GL + EL + BS + EvL
-                print("suck my balls");print(GL);print(EvL);print(EL);print(TWN)
+                print("suck my BALLLLLSSSSSSSSSSss");print(GL);print(EvL);print(EL);print(TWN)
                 x <- seq(1,180)
                 y <- rep(10,180)
                 plot(x,y)
