@@ -20,7 +20,7 @@ Styles <- dbReadTable(db, "Styles")
 setwd("~/Github/BK_Brew/App") #Change directory to App
 # Load UI Components --------------------
 source("~/Github/BK_Brew/App/SidePanel.R", local = TRUE)
-source("~/Github/BK_Brew/App/MainPanel.R", local = TRUE)
+source("~/Github/BK_Brew/App/MainPanelUI.R", local = TRUE)
 source("~/Github/BK_Brew/App/Fermentables/FermentablesUI.R", local = TRUE)
 source("~/Github/BK_Brew/App/Yeast/YeastUI.R", local = TRUE)
 source("~/Github/BK_Brew/App/Hops/HopsUI.R", local = TRUE)
@@ -29,6 +29,7 @@ source("~/Github/BK_Brew/App/Chemistry/ChemistryUI.R", local = TRUE)
 source("~/Github/BK_Brew/App/Water/WaterUI.R", local = TRUE)
 source("~/Github/BK_Brew/App/Fermentation/FermentationUI.R", local = TRUE)
 # Load Server Components --------------------
+source("~/Github/BK_Brew/App/MainPanelServer.R", local = TRUE)
 source("~/Github/BK_Brew/App/Fermentables/FermentablesServer.R", local = TRUE)
 source("~/Github/BK_Brew/App/Yeast/YeastServer.R", local = TRUE)
 source("~/Github/BK_Brew/App/Hops/HopsServer.R", local = TRUE)
@@ -84,6 +85,8 @@ server <- function(input, output){
                         width = 1545,
                         height = 400))
         },deleteFile = FALSE)
+# Main Panel Server - --------------------
+        mainPanelServer(input, output)
 # Fermentables Output --------------------
         fermentablesServer(input, output)
 # Yeast Output --------------------

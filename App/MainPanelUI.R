@@ -27,12 +27,6 @@ panelMain <- function(){
                                 value = 100)
             ),
             column(width = 5, offset = 1,
-                   numericInput(inputId = "weightMashTun",
-                                label = "Weight of Mash Tun (lbs):",
-                                value = 7.5),
-                   numericInput(inputId = "thermalMassMashTun",
-                                label = "Thermal Mash of Mash Tun (btu/(lb*F)):",
-                                value = 0.38),
                    numericInput(inputId = "kettleDeadSpace",
                                 label = "Boil Kettle Dead Space (Gal):",
                                 value = 0.0),
@@ -44,7 +38,12 @@ panelMain <- function(){
                                 value = 0),
                    numericInput(inputId = "fermentationTankLoss",
                                 label = "Fermentation Tank Loss (Gal):",
-                                value = 0)
+                                value = 0),
+                   selectInput(inputId = "MashTunType",
+                               label = "Mash Tun Type",
+                               choices =  c("Kettle/Pot",
+                                            "Cooler")),
+                   uiOutput("MashTunExtras")
             )
         ),
         width = 10
