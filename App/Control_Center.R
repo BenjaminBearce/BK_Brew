@@ -1,5 +1,3 @@
-cat("my name is kyle")
-
 library(shiny)
 
 # Load Data --------------------
