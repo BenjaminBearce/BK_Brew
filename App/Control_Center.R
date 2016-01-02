@@ -1,5 +1,4 @@
-cat("Ben wuz here after that.")
-cat("Hi ben.")
+cat("test")
 
 library(shiny)
 
