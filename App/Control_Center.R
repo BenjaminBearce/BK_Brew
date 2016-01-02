@@ -1,7 +1,4 @@
-cat("Ben wuz here after that.")
-cat("Hi ben.")
-
-library(shiny)
+ibrary(shiny)
 
 # Load Data --------------------
 library(shiny, quietly = TRUE, warn.conflicts = FALSE)
