@@ -1,4 +1,4 @@
-ibrary(shiny)
+library(shiny)
 
 # Load Data --------------------
 library(shiny, quietly = TRUE, warn.conflicts = FALSE)
