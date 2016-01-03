@@ -6,6 +6,7 @@ library(RODBC, quietly = TRUE, warn.conflicts = FALSE)
 library(sqldf, quietly = TRUE, warn.conflicts = FALSE)
 library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
 library(stringr, quietly = TRUE, warn.conflicts = FALSE)
+library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
 
 
 setwd("~/Github/BK_Brew/Database") #Change directory to Brewing directory

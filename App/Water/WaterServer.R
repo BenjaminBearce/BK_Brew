@@ -1,39 +1,88 @@
 # Water Server
 
 waterServer <- function(input, output){
-        output$waterBatchSize <- renderText({
-                input$batchSize
+        #Constants that are dynamic
+        grainLoss <- reactive({
+                totalGrain()*input$grainAbsorptionFactor
         })
         
-        output$waterTotalGrain <- renderText({
-                totalGrain()
+        lauterLoss <- reactive({
+                input$lauterTunDeadSpace*(1-input$shrink/100)
+        })
+        mashLoss <- reactive({
+                input$mashTunDeadSpace*(1-input$shrink/100)
+        })
+        kettleLoss <- reactive({
+                input$kettleDeadSpace*(1-input$shrink/100)
+        })
+        fermentationLoss <- reactive({
+                input$fermentationTankLoss
+        })
+        BS <- reactive({
+                input$batchSize      
+        })
+        EvL <- reactive({
+                BS()*((input$boilTime/60)*(input$evap/100)/(1-(input$boilTime/60)*(input$evap/100)))
+        })
+        EL <- reactive({
+                lauterLoss() + mashLoss() + kettleLoss() + fermentationLoss()
+        })
+        TWN <- reactive({
+                grainLoss() + EL() + BS() + EvL()
         })
         
-        output$waterBoilTime <- renderText({
-                input$boilTime
+        #Output objects
+        output$waterTotalWaterNeeded <- renderText({
+                TWN()
+        })
+        
+        output$waterGrainLoss <- renderText({
+                grainLoss()
         })
         
         output$waterEquipLoss <- renderText({
-                input$kettleDeadSpace + input$lauterTunDeadSpace + input$mashTunDeadSpace + input$fermentationTankLoss
+                EL()
+        })
+        
+        output$waterEvapLoss <- renderText({
+                EvL()
+        })
+        
+        
+        output$waterBatchSize <- renderText({
+                BS()
         })
         
         output$waterGraph <- renderPlot({
-                #Grains
-                GL <- totalGrain()*input$grainAbsorptionFactor
-                #Equipment Losses broken down
-                lauterLoss <- input$lauterTunDeadSpace
-                mashLoss <- input$mashTunDeadSpace
-                kettleLoss <- input$kettleDeadSpace
-                fermentationLoss <- input$fermentationTankLoss
+              
+                print("GL")
+                grainLoss() 
+                print("EL")
+                EL() 
+                print("BS")
+                BS() 
+                print("EvL")
+                EvL() 
+                print("TWN")
+                TWN() 
                 
-                EL <- input$kettleDeadSpace + input$lauterTunDeadSpace + input$mashTunDeadSpace + input$fermentationTankLoss
-                BS <- input$batchSize
-                EvL <- BS*((input$boilTime/60)*(input$evap/100)/(1-(input$boilTime/60)*(input$evap/100)))
-                TWN <- GL + EL + BS + EvL
-                print("suck my BALLLLLSSSSSSSSSSss");print(GL);print(EvL);print(EL);print(TWN)
-                x <- seq(1,180)
-                y <- rep(10,180)
-                plot(x,y)
+#                 waterData <- data.frame(step = 1:6,
+#                                         TWN = ,
+#                                         PostMash = ,
+#                                         PostSparge = ,
+#                                         PostBoil = ,
+#                                         Cooling = ,
+#                                         Fermentation = )
+                
+                
+                waterData <- data.frame(step = seq(1,6), vol = c(TWN(),
+                                                                 TWN()-grainLoss(),
+                                                                 TWN()-grainLoss()-mashLoss(),
+                                                                 TWN()-grainLoss()-mashLoss()-lauterLoss(),
+                                                                 TWN()-grainLoss()-mashLoss()-lauterLoss()-kettleLoss()-EvL(),
+                                                                 TWN()-grainLoss()-mashLoss()-lauterLoss()-kettleLoss()-EvL()-fermentationLoss()))
+                waterGraph <- ggplot(data = waterData, aes(step,vol))
+                waterGraph + ggtitle("Total Water Needed") + geom_step()
         })
         
 }
