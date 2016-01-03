@@ -2,25 +2,35 @@
 
 waterUI <- function(){
         tabPanel(title = "Water",
-                 sidebarLayout(
-                         sidebarPanel(style = "background-color: #BED4C9", width = 2,
-                                      strong("Batch Size (Gal):"),
-                                      wellPanel(textOutput(outputId = "waterBatchSize")),
-                                      strong("Grain Bill (Lbs):"),
-                                      wellPanel(textOutput(outputId = "waterTotalGrain")),
-                                      strong("Equip. Losses (Gal):"),
-                                      wellPanel(textOutput(outputId = "waterEquipLoss")),
-                                      numericInput(inputId = "mashThickness",
-                                                   label = "Mash Thickness (Qts/Lb):",
-                                                   value = 1.25),
-                                      numericInput(inputId = "grainAbsorptionFactor",
-                                                   label = "Grain Absorption Factor (Gal/Lb):",
-                                                   value = .125)
+                 splitLayout(
+                         
                                       
-                         ),
-                         mainPanel(
-                                   plotOutput(outputId = "waterGraph"))
-
+                      splitLayout(width = 4,
+                              fluidRow(
+                              
+                              column(width = 2,
+                               strong("Total Water (Gal):"),
+                               wellPanel(textOutput(outputId = "waterTotalWaterNeeded")),
+                               strong("Grain Loss (Gal):"),
+                               wellPanel(textOutput(outputId = "waterGrainLoss")),
+                               strong("Equipment Loss (Gal):"),
+                               wellPanel(textOutput(outputId = "waterEquipLoss")),
+                               strong("Water Evap Loss (Gal):"),
+                               wellPanel(textOutput(outputId = "waterEvapLoss")))
+                              ,
+                              column(width = 2, offset = 2,
+                                numericInput(inputId = "mashThickness",
+                                             label = "Mash Thickness (Qts/Lb):",
+                                             value = 1.25),
+                                numericInput(inputId = "grainAbsorptionFactor",
+                                             label = "Grain Abs. Factor (Gal/Lb):",
+                                             value = .125))
+                              )
+                      ),
+                      
+                      plotOutput(outputId = "waterGraph")
+                                      
+                                      
+                         )
                  )
-        )
 }
