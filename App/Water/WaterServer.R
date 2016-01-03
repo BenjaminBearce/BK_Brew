@@ -7,13 +7,13 @@ waterServer <- function(input, output){
         })
         
         lauterLoss <- reactive({
-                input$lauterTunDeadSpace*(1-input$shrink/100)
+                input$lauterTunDeadSpace
         })
         mashLoss <- reactive({
-                input$mashTunDeadSpace*(1-input$shrink/100)
+                input$mashTunDeadSpace
         })
         kettleLoss <- reactive({
-                input$kettleDeadSpace*(1-input$shrink/100)
+                input$kettleDeadSpace
         })
         fermentationLoss <- reactive({
                 input$fermentationTankLoss
@@ -28,7 +28,9 @@ waterServer <- function(input, output){
                 lauterLoss() + mashLoss() + kettleLoss() + fermentationLoss()
         })
         TWN <- reactive({
-                grainLoss() + EL() + BS() + EvL()
+                #grainLoss() + EL() + BS() + EvL()
+                
+                ((BS()+input$kettleDeadSpace + input$fermentationTankLoss)/((1-input$shrink/100)*(1-(input$boilTime/60)*(input$evap/100)))) + input$lauterTunDeadSpace + input$mashTunDeadSpace + grainLoss()
         })
         
         #Output objects
