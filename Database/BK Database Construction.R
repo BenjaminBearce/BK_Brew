@@ -28,7 +28,8 @@ dbSendQuery(conn = dbIngredients,
             SRM DOUBLE,
             EZWaterCode INT,
             FlavorProfile TEXT,
-            DP INT)")
+            DP INT,
+            isGrain INT)")
 #Extracts
 dbSendQuery(conn = dbIngredients,
             "CREATE TABLE Extracts
@@ -37,7 +38,9 @@ dbSendQuery(conn = dbIngredients,
             PPG DOUBLE,
             SRM DOUBLE,
             EZWaterCode INT,
-            FlavorProfile TEXT)")
+            FlavorProfile TEXT,
+            DP INT,
+            isGrain INT)")
 #Adjuncts
 dbSendQuery(conn = dbIngredients,
             "CREATE TABLE Adjuncts
@@ -46,7 +49,9 @@ dbSendQuery(conn = dbIngredients,
             PPG DOUBLE,
             SRM DOUBLE,
             EZWaterCode INT,
-            FlavorProfile TEXT)")
+            FlavorProfile TEXT,
+            DP INT,
+            isGrain INT)")
 #Hops
 dbSendQuery(conn = dbIngredients,
             "CREATE TABLE Hops

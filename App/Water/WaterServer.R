@@ -66,23 +66,48 @@ waterServer <- function(input, output){
                 print("TWN")
                 TWN() 
                 
+                waterData <- data.frame(x = factor(c("TWN",
+                                                     "PostMash",
+                                                     "PostSparge",
+                                                     "PostBoil",
+                                                     "Cooling",
+                                                     "Fermentation"),
+                                                   ordered = T,
+                                                   levels = c("TWN",
+                                                              "PostMash",
+                                                              "PostSparge",
+                                                              "PostBoil",
+                                                              "Cooling",
+                                                              "Fermentation")),
+                                        y = c(TWN(),
+                                              TWN()-grainLoss(),
+                                              TWN()-grainLoss()-mashLoss(),
+                                              TWN()-grainLoss()-mashLoss()-lauterLoss(),
+                                              TWN()-grainLoss()-mashLoss()-lauterLoss()-kettleLoss()-EvL(),
+                                              TWN()-grainLoss()-mashLoss()-lauterLoss()-kettleLoss()-EvL()-fermentationLoss()))
+                #class(waterData)
+                ggplot(data = waterData, aes(x,y)) +
+                        geom_bar(stat = "identity", fill = I("grey50")) +
+                        ggtitle("Total Water Needed")
+                
+                
 #                 waterData <- data.frame(step = 1:6,
-#                                         TWN = ,
-#                                         PostMash = ,
+#                                         TWN = TWN(),
+#                                         PostMash = grainLoss,
 #                                         PostSparge = ,
 #                                         PostBoil = ,
 #                                         Cooling = ,
 #                                         Fermentation = )
                 
                 
-                waterData <- data.frame(step = seq(1,6), vol = c(TWN(),
-                                                                 TWN()-grainLoss(),
-                                                                 TWN()-grainLoss()-mashLoss(),
-                                                                 TWN()-grainLoss()-mashLoss()-lauterLoss(),
-                                                                 TWN()-grainLoss()-mashLoss()-lauterLoss()-kettleLoss()-EvL(),
-                                                                 TWN()-grainLoss()-mashLoss()-lauterLoss()-kettleLoss()-EvL()-fermentationLoss()))
-                waterGraph <- ggplot(data = waterData, aes(step,vol))
-                waterGraph + ggtitle("Total Water Needed") + geom_step()
+#                 waterData <- data.frame(step = seq(1,6), vol = c(TWN(),
+#                                                                  TWN()-grainLoss(),
+#                                                                  TWN()-grainLoss()-mashLoss(),
+#                                                                  TWN()-grainLoss()-mashLoss()-lauterLoss(),
+#                                                                  TWN()-grainLoss()-mashLoss()-lauterLoss()-kettleLoss()-EvL(),
+#                                                                  TWN()-grainLoss()-mashLoss()-lauterLoss()-kettleLoss()-EvL()-fermentationLoss()))
+#                 waterGraph <- ggplot(data = waterData, aes(step,vol))
+#                 waterGraph + ggtitle("Total Water Needed") + geom_step()
         })
         
 }

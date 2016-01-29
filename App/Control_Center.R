@@ -7,13 +7,16 @@ library(sqldf, quietly = TRUE, warn.conflicts = FALSE)
 library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
 library(stringr, quietly = TRUE, warn.conflicts = FALSE)
 library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
+library(shinyBS, quietly = TRUE, warn.conflicts = FALSE)
 
 
 setwd("~/Github/BK_Brew/Database") #Change directory to Brewing directory
 db <- dbConnect(SQLite(), dbname="Ingredients.sqlite")
 Grains <- dbReadTable(db, "Grains")
+Grains <- Grains[order(Grains$Ingredients),]
 Extracts <- dbReadTable(db, "Extracts")
 Adjuncts <- dbReadTable(db, "Adjuncts")
+Grists <- rbind(Grains,Extracts,Adjuncts)
 Hops <- dbReadTable(db, "Hops")
 Spices <- dbReadTable(db, "Spices")
 Yeast <- dbReadTable(db, "Yeast")
@@ -41,43 +44,43 @@ source("~/Github/BK_Brew/App/Fermentation/FermentationServer.R", local = TRUE)
 
 # UI --------------------
 ui <- fluidPage(
-# Header --------------------
-    titlePanel("BK Brewery", windowTitle = "BK Brewery"),
-    imageOutput("image"),
-# Sidebar Layout --------------------
-    wellPanel(style = "background-color: #0EAE20",
-            sidebarLayout(
-                
-# Sidebar Panel --------------------
-                sidePanel(),
-# Main Panel --------------------
-                panelMain()
-                
-            )
-    ),
-# Tabset Panel --------------------
-
-    tabsetPanel(type = "tabs",
-# Fermentables --------------------
-        fermentablesUI(),
-# Yeast --------------------
-        yeastUI(),
-# Hops --------------------
-        hopsUI(),
-# Mash --------------------
-        mashUI(),
-# Chemistry --------------------
-        chemistryUI(),
-# Water --------------------
-        waterUI(),
-# Fermentation --------------------
-        fermentationUI()
-    )
-
+        # Header --------------------
+        titlePanel("BK Brewery", windowTitle = "BK Brewery"),
+        imageOutput("image"),
+        # Sidebar Layout --------------------
+        wellPanel(style = "background-color: #0EAE20",
+                  sidebarLayout(
+                          
+                          # Sidebar Panel --------------------
+                          sidePanel(),
+                          # Main Panel --------------------
+                          panelMain()
+                          
+                  )
+        ),
+        # Tabset Panel --------------------
+        
+        tabsetPanel(type = "tabs",
+                    # Fermentables --------------------
+                    fermentablesUI(),
+                    # Yeast --------------------
+                    yeastUI(),
+                    # Hops --------------------
+                    hopsUI(),
+                    # Mash --------------------
+                    mashUI(),
+                    # Chemistry --------------------
+                    chemistryUI(),
+                    # Water --------------------
+                    waterUI(),
+                    # Fermentation --------------------
+                    fermentationUI()
+        )
+        
 )
 # Server --------------------
-server <- function(input, output){
-# Header Image Output -------------------- 
+server <- function(input, output, session){
+        # Header Image Output -------------------- 
         output$image <- renderImage({
                 return(list(
                         src = "Brew.png",
@@ -86,21 +89,21 @@ server <- function(input, output){
                         width = 1545,
                         height = 400))
         },deleteFile = FALSE)
-# Main Panel Server - --------------------
+        # Main Panel Server - --------------------
         mainPanelServer(input, output)
-# Fermentables Output --------------------
-        fermentablesServer(input, output)
-# Yeast Output --------------------
+        # Fermentables Output --------------------
+        fermentablesServer(input, output, session)
+        # Yeast Output --------------------
         yeastServer(input, output)
-# Hops Output --------------------
+        # Hops Output --------------------
         hopsServer(input, output)
-# Mash Schedule Output --------------------
+        # Mash Schedule Output --------------------
         mashServer(input, output)
-# Chemistry Output --------------------
+        # Chemistry Output --------------------
         chemistryServer(input, output)
-# Water Output --------------------
+        # Water Output --------------------
         waterServer(input, output)
-# Fermentation Output --------------------
+        # Fermentation Output --------------------
         fermentationServer(input, output)
 }
 
