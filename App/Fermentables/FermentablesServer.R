@@ -25,6 +25,7 @@ calcGrain <- function(input,ing,ingPct){
 }
 
 calcTotGrain <- function(input){
+<<<<<<< HEAD
         grains1 <- calcGrain(input,input$Ingredients1,input$IngredientPercent1)
         grains2 <- calcGrain(input,input$Ingredients2,input$IngredientPercent2)
         grains3 <- calcGrain(input,input$Ingredients3,input$IngredientPercent3)
@@ -32,6 +33,15 @@ calcTotGrain <- function(input){
         grains5 <- calcGrain(input,input$Ingredients5,input$IngredientPercent5)
         
         lbs <- as.numeric(grains1+grains2+grains3+grains4+grains5)
+=======
+        g1 <- calcGrain(input,input$Ingredients1,input$IngredientPercent1)
+        g2 <- calcGrain(input,input$Ingredients2,input$IngredientPercent2)
+        g3 <- calcGrain(input,input$Ingredients3,input$IngredientPercent3)
+        g4 <- calcGrain(input,input$Ingredients4,input$IngredientPercent4)
+        g5 <- calcGrain(input,input$Ingredients5,input$IngredientPercent5)
+        
+        lbs <- as.numeric(g1+g2+g3+g4+g5)
+>>>>>>> 3b47e85f365fe5ddadba7c733f4dbf78b418c779
 }
 
 # Fermentables Server
@@ -39,6 +49,7 @@ calcTotGrain <- function(input){
 fermentablesServer <- function(input, output, session){
         DPcalc <- reactive({
                 
+<<<<<<< HEAD
                 DPnum <- as.numeric((Grists %>% filter(Ingredients == input$Ingredients1) %>% mutate(DP1=DP*isGrain*grainRct1()) %>% select(DP1)) +
                                              (Grists %>% filter(Ingredients == input$Ingredients2) %>% mutate(DP2=DP*isGrain*grainRct2()) %>% select(DP2)) +
                                              (Grists %>% filter(Ingredients == input$Ingredients3) %>% mutate(DP3=DP*isGrain*grainRct3()) %>% select(DP3)) +
@@ -49,6 +60,18 @@ fermentablesServer <- function(input, output, session){
                                              (Grists %>% filter(Ingredients == input$Ingredients3) %>% select(isGrain)*grainRct3()) +
                                              (Grists %>% filter(Ingredients == input$Ingredients4) %>% select(isGrain)*grainRct4()) +
                                              (Grists %>% filter(Ingredients == input$Ingredients5) %>% select(isGrain)*grainRct5()))
+=======
+                DPnum <- as.numeric((Grists %>% filter(Ingredients == input$Ingredients1) %>% mutate(DP1=DP*isGrain*grains1()) %>% select(DP1)) +
+                                             (Grists %>% filter(Ingredients == input$Ingredients2) %>% mutate(DP2=DP*isGrain*grains2()) %>% select(DP2)) +
+                                             (Grists %>% filter(Ingredients == input$Ingredients3) %>% mutate(DP3=DP*isGrain*grains3()) %>% select(DP3)) +
+                                             (Grists %>% filter(Ingredients == input$Ingredients4) %>% mutate(DP4=DP*isGrain*grains4()) %>% select(DP4)) +
+                                             (Grists %>% filter(Ingredients == input$Ingredients5) %>% mutate(DP5=DP*isGrain*grains5()) %>% select(DP5)))
+                DPden <- as.numeric((Grists %>% filter(Ingredients == input$Ingredients1) %>% select(isGrain)*grains1()) +
+                                             (Grists %>% filter(Ingredients == input$Ingredients2) %>% select(isGrain)*grains2()) +
+                                             (Grists %>% filter(Ingredients == input$Ingredients3) %>% select(isGrain)*grains3()) +
+                                             (Grists %>% filter(Ingredients == input$Ingredients4) %>% select(isGrain)*grains4()) +
+                                             (Grists %>% filter(Ingredients == input$Ingredients5) %>% select(isGrain)*grains5()))
+>>>>>>> 3b47e85f365fe5ddadba7c733f4dbf78b418c779
                 
                 DP <- DPnum/DPden
                 
@@ -82,6 +105,7 @@ fermentablesServer <- function(input, output, session){
                 }
         })
         
+<<<<<<< HEAD
         grainRct1 <<- reactive({calcGrain(input,input$Ingredients1,input$IngredientPercent1)})
         grainRct2 <<- reactive({calcGrain(input,input$Ingredients2,input$IngredientPercent2)})
         grainRct3 <<- reactive({calcGrain(input,input$Ingredients3,input$IngredientPercent3)})
@@ -104,6 +128,29 @@ fermentablesServer <- function(input, output, session){
         })
         output$OG5 <- renderText({
                 as.character(round(grainRct5(),2))
+=======
+        grains1 <<- reactive({calcGrain(input,input$Ingredients1,input$IngredientPercent1)})
+        grains2 <<- reactive({calcGrain(input,input$Ingredients2,input$IngredientPercent2)})
+        grains3 <<- reactive({calcGrain(input,input$Ingredients3,input$IngredientPercent3)})
+        grains4 <<- reactive({calcGrain(input,input$Ingredients4,input$IngredientPercent4)})
+        grains5 <<- reactive({calcGrain(input,input$Ingredients5,input$IngredientPercent5)})
+        totalGrain <<- reactive({calcTotGrain(input)})
+        
+        output$OG1 <- renderText({
+                as.character(round(grains1(),2))
+        })
+        output$OG2 <- renderText({
+                as.character(round(grains2(),2))
+        })
+        output$OG3 <- renderText({
+                as.character(round(grains3(),2))
+        })
+        output$OG4 <- renderText({
+                as.character(round(grains4(),2))
+        })
+        output$OG5 <- renderText({
+                as.character(round(grains5(),2))
+>>>>>>> 3b47e85f365fe5ddadba7c733f4dbf78b418c779
         })
         
         output$fermentablesTotalGrain <- renderText({
