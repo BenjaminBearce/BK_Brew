@@ -1,15 +1,10 @@
-calcGrain <- function(input,ing,ingPct){
+calcLbs <- function(input,ing,ingPct){
         
         if (ing != " None") {
-                OG <- as.character(subset(Styles, Styles == input$Style, select = GravityRange))
-                OG <- OG %>%
-                        str_split("-") %>%
-                        unlist() %>%
-                        as.numeric()
-                
-                lowerRange <- (OG[1]-1)*1000
-                higherRange <- OG[2]
-                
+
+                lowerRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeLow)) - 1)*1000
+                higherRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeHigh)) - 1)*1000
+                print(class(lowerRange));print(class(higherRange))
                 OG <- mean(c(lowerRange,higherRange)) #/1000+1
                 
                 totalGravity <- OG*input$batchSize #OG*Gal
@@ -26,11 +21,11 @@ calcGrain <- function(input,ing,ingPct){
 
 calcTotGrain <- function(input){
 
-        grains1 <- calcGrain(input,input$Ingredients1,input$IngredientPercent1)
-        grains2 <- calcGrain(input,input$Ingredients2,input$IngredientPercent2)
-        grains3 <- calcGrain(input,input$Ingredients3,input$IngredientPercent3)
-        grains4 <- calcGrain(input,input$Ingredients4,input$IngredientPercent4)
-        grains5 <- calcGrain(input,input$Ingredients5,input$IngredientPercent5)
+        grains1 <- calcLbs(input,input$Ingredients1,input$IngredientPercent1)
+        grains2 <- calcLbs(input,input$Ingredients2,input$IngredientPercent2)
+        grains3 <- calcLbs(input,input$Ingredients3,input$IngredientPercent3)
+        grains4 <- calcLbs(input,input$Ingredients4,input$IngredientPercent4)
+        grains5 <- calcLbs(input,input$Ingredients5,input$IngredientPercent5)
         
         lbs <- as.numeric(grains1+grains2+grains3+grains4+grains5)
 
@@ -86,26 +81,26 @@ fermentablesServer <- function(input, output, session){
                 }
         })
         
-        grains1 <<- reactive({calcGrain(input,input$Ingredients1,input$IngredientPercent1)})
-        grains2 <<- reactive({calcGrain(input,input$Ingredients2,input$IngredientPercent2)})
-        grains3 <<- reactive({calcGrain(input,input$Ingredients3,input$IngredientPercent3)})
-        grains4 <<- reactive({calcGrain(input,input$Ingredients4,input$IngredientPercent4)})
-        grains5 <<- reactive({calcGrain(input,input$Ingredients5,input$IngredientPercent5)})
+        grains1 <<- reactive({calcLbs(input,input$Ingredients1,input$IngredientPercent1)})
+        grains2 <<- reactive({calcLbs(input,input$Ingredients2,input$IngredientPercent2)})
+        grains3 <<- reactive({calcLbs(input,input$Ingredients3,input$IngredientPercent3)})
+        grains4 <<- reactive({calcLbs(input,input$Ingredients4,input$IngredientPercent4)})
+        grains5 <<- reactive({calcLbs(input,input$Ingredients5,input$IngredientPercent5)})
         totalGrain <<- reactive({calcTotGrain(input)})
         
-        output$OG1 <- renderText({
+        output$Lbs1 <- renderText({
                 as.character(round(grains1(),2))
         })
-        output$OG2 <- renderText({
+        output$Lbs2 <- renderText({
                 as.character(round(grains2(),2))
         })
-        output$OG3 <- renderText({
+        output$Lbs3 <- renderText({
                 as.character(round(grains3(),2))
         })
-        output$OG4 <- renderText({
+        output$Lbs4 <- renderText({
                 as.character(round(grains4(),2))
         })
-        output$OG5 <- renderText({
+        output$Lbs5 <- renderText({
                 as.character(round(grains5(),2))
 
         })

@@ -21,6 +21,8 @@ Hops <- dbReadTable(db, "Hops")
 Spices <- dbReadTable(db, "Spices")
 Yeast <- dbReadTable(db, "Yeast")
 Styles <- dbReadTable(db, "Styles")
+
+
 setwd("~/Github/BK_Brew/App") #Change directory to App
 # Load UI Components --------------------
 source("~/Github/BK_Brew/App/SidePanel.R", local = TRUE)
@@ -46,20 +48,7 @@ source("~/Github/BK_Brew/App/Fermentation/FermentationServer.R", local = TRUE)
 ui <- fluidPage(
         # Header --------------------
         titlePanel("BK Brewery", windowTitle = "BK Brewery"),
-        imageOutput("image"),
-        # Sidebar Layout --------------------
-        wellPanel(style = "background-color: #0EAE20",
-                  sidebarLayout(
-                          
-                          # Sidebar Panel --------------------
-                          sidePanel(),
-                          # Main Panel --------------------
-                          panelMain()
-                          
-                  )
-        ),
         # Tabset Panel --------------------
-        
         tabsetPanel(type = "tabs",
                     # Fermentables --------------------
                     fermentablesUI(),
@@ -75,8 +64,21 @@ ui <- fluidPage(
                     waterUI(),
                     # Fermentation --------------------
                     fermentationUI()
-        )
+        ),
+        wellPanel(style = "background-color: #0EAE20",
+                  sidebarLayout(
+                          
+                          # Sidebar Panel --------------------
+                          sidePanel(),
+                          # Main Panel --------------------
+                          panelMain()
+                          
+                  )
+        ),
+        imageOutput("image")
         
+        # Sidebar Layout --------------------
+
 )
 # Server --------------------
 server <- function(input, output, session){

@@ -29,7 +29,7 @@ fermentablesUI <- function(){
                          ),
                          column(width = 2,
                                 strong("Lbs"),
-                                verbatimTextOutput(outputId = "OG1")
+                                verbatimTextOutput(outputId = "Lbs1") 
                          ),
                          column(width = 2,
                                 strong("Total Grains (Lbs)"),
@@ -49,7 +49,7 @@ fermentablesUI <- function(){
                                              value = 0)
                          ),
                          column(width = 2,
-                                verbatimTextOutput(outputId = "OG2")
+                                verbatimTextOutput(outputId = "Lbs2")
                          )
                  ),
                  fluidRow(
@@ -64,7 +64,7 @@ fermentablesUI <- function(){
                                              value = 0)
                          ),
                          column(width = 2,
-                                verbatimTextOutput(outputId = "OG3")
+                                verbatimTextOutput(outputId = "Lbs3")
                          )
                  ),
                  fluidRow(
@@ -79,7 +79,7 @@ fermentablesUI <- function(){
                                              value = 0)
                          ),
                          column(width = 2,
-                                verbatimTextOutput(outputId = "OG4")
+                                verbatimTextOutput(outputId = "Lbs4")
                          )
                  ),
                  fluidRow(
@@ -94,7 +94,7 @@ fermentablesUI <- function(){
                                              value = 0)
                          ),
                          column(width = 2,
-                                verbatimTextOutput(outputId = "OG5")
+                                verbatimTextOutput(outputId = "Lbs5")
                          )
                  ),
                  HTML("<br><br><br><br><br>")

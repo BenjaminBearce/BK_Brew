@@ -2,6 +2,6 @@
 
 hopsServer <- function(input, output){
         output$hopsTotalGrain <- renderText({
-                totalGrain()
+               "Q"# totalGrain()
         })
 }
