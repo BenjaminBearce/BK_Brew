@@ -4,7 +4,7 @@ calcLbs <- function(input,ing,ingPct){
 
                 lowerRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeLow)) - 1)*1000
                 higherRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeHigh)) - 1)*1000
-                print(class(lowerRange));print(class(higherRange))
+               
                 OG <- mean(c(lowerRange,higherRange)) #/1000+1
                 
                 totalGravity <- OG*input$batchSize #OG*Gal
