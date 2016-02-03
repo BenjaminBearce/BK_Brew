@@ -9,13 +9,13 @@ calcLbs <- function(input,ing,ingPct){
                 
                 totalGravity <- OG*input$batchSize #OG*Gal
                 
-                grains <- Grists %>% 
+                lbs <- Grists %>% 
                         filter(Ingredients == ing) %>% 
                         mutate(IngredientGravity = ingPct/100*totalGravity) %>%
                         mutate(lbsNeeded = IngredientGravity/((PPG-1)*1000*input$sysEfficiency/100)) %>%
                         select(lbsNeeded)
         } else {
-                grains <- 0
+                lbs <- 0
         }
 }
 

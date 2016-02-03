@@ -22,6 +22,9 @@ Spices <- dbReadTable(db, "Spices")
 Yeast <- dbReadTable(db, "Yeast")
 Styles <- dbReadTable(db, "Styles")
 
+db <-  dbConnect(SQLite(), dbname="BKBrewHouse.sqlite")
+GravityVersusTemp <-  dbReadTable(db, "GravityCorrectionChart")
+
 
 setwd("~/Github/BK_Brew/App") #Change directory to App
 # Load UI Components --------------------
@@ -110,7 +113,7 @@ server <- function(input, output, session){
 }
 
 # Build App --------------------
-shinyApp(ui = ui, server = server)
+runApp(shinyApp(ui = ui, server = server), launch.browser = TRUE)
 
 
 

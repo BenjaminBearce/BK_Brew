@@ -7,7 +7,7 @@ tabPanel("Hops",
                 column(width = 2,
                        selectInput(inputId = "Hops1",
                                    label = "Hops",
-                                   choices =  c(1,2,3))
+                                   choices =  Hops$Hops)
                 ),
                 column(width = 2,
                        numericInput(inputId = "Weight1",
@@ -15,9 +15,7 @@ tabPanel("Hops",
                                     value = 0)
                 ),
                 column(width = 2,
-                       numericInput(inputId = "AAU1",
-                                    label = "AAU",
-                                    value = 0)
+                       uiOutput(outputId = "hopsAlphaAcidOne")
                 ),
                 column(width = 2,
                        numericInput(inputId = "BoilTime1",
@@ -37,7 +35,7 @@ tabPanel("Hops",
                 column(width = 2,
                        selectInput(inputId = "Hops2",
                                    label = NULL,
-                                   choices =  c(1,2,3))
+                                   choices =  Hops$Hops)
                 ),
                 column(width = 2,
                        numericInput(inputId = "Weight2",
@@ -45,9 +43,7 @@ tabPanel("Hops",
                                     value = 0)
                 ),
                 column(width = 2,
-                       numericInput(inputId = "AAU2",
-                                    label = NULL,
-                                    value = 0)
+                       uiOutput(outputId = "hopsAlphaAcidTwo")
                 ),
                 column(width = 2,
                        numericInput(inputId = "BoilTime2",
@@ -65,7 +61,7 @@ tabPanel("Hops",
                 column(width = 2,
                        selectInput(inputId = "Hops3",
                                    label = NULL,
-                                   choices =  c(1,2,3))
+                                   choices =  Hops$Hops)
                 ),
                 column(width = 2,
                        numericInput(inputId = "Weight3",
@@ -73,9 +69,7 @@ tabPanel("Hops",
                                     value = 0)
                 ),
                 column(width = 2,
-                       numericInput(inputId = "AAU3",
-                                    label = NULL,
-                                    value = 0)
+                       uiOutput(outputId = "hopsAlphaAcidThree")
                 ),
                 column(width = 2,
                        numericInput(inputId = "BoilTime3",
@@ -93,7 +87,7 @@ tabPanel("Hops",
                 column(width = 2,
                        selectInput(inputId = "Hops4",
                                    label = NULL,
-                                   choices =  c(1,2,3))
+                                   choices =  Hops$Hops)
                 ),
                 column(width = 2,
                        numericInput(inputId = "Weight4",
@@ -101,9 +95,7 @@ tabPanel("Hops",
                                     value = 0)
                 ),
                 column(width = 2,
-                       numericInput(inputId = "AAU4",
-                                    label = NULL,
-                                    value = 0)
+                       uiOutput(outputId = "hopsAlphaAcidFour")
                 ),
                 column(width = 2,
                        numericInput(inputId = "BoilTime4",
@@ -121,7 +113,7 @@ tabPanel("Hops",
                 column(width = 2,
                        selectInput(inputId = "Hops5",
                                    label = NULL,
-                                   choices =  c(1,2,3))
+                                   choices =  Hops$Hops)
                 ),
                 column(width = 2,
                        numericInput(inputId = "Weight5",
@@ -129,9 +121,7 @@ tabPanel("Hops",
                                     value = 0)
                 ),
                 column(width = 2,
-                       numericInput(inputId = "AAU5",
-                                    label = NULL,
-                                    value = 0)
+                       uiOutput(outputId = "hopsAlphaAcidFive")
                 ),
                 column(width = 2,
                        numericInput(inputId = "BoilTime5",
@@ -143,6 +133,12 @@ tabPanel("Hops",
                 ),
                 column(width = 2,
                        verbatimTextOutput(outputId = "hopsIBU5") #switch to verbatimTextOutput() for reactive values
+                )
+        ),
+        fluidRow(
+                column(width = 2,
+                       strong("Boil Gravity"),
+                       verbatimTextOutput(outputId = "hopsBoilGravity")
                 )
         ),
         HTML("<br><br><br><br><br>")
