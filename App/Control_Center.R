@@ -24,7 +24,7 @@ Styles <- dbReadTable(db, "Styles")
 
 db <-  dbConnect(SQLite(), dbname="BKBrewHouse.sqlite")
 GravityVersusTemp <-  dbReadTable(db, "GravityCorrectionChart")
-
+closeAllConnections()
 
 setwd("~/Github/BK_Brew/App") #Change directory to App
 # Load UI Components --------------------

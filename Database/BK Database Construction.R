@@ -6,7 +6,7 @@
 suppressWarnings(suppressMessages(library(gdata))) #Suppress loading info on Excel reading package
 suppressWarnings(suppressMessages(library(sqldf)))
 
-setwd("./Database")
+setwd("C:/Users/Benjamin/Documents/GitHub/BK_Brew/Database")
 Grains_Info <- read.xls("Brewing_Constants.xlsx",sheet = "Grains", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
 Extracts_Info <- read.xls("Brewing_Constants.xlsx",sheet = "Extracts", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
 Adjuncts_Info <- read.xls("Brewing_Constants.xlsx",sheet = "Adjuncts", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
