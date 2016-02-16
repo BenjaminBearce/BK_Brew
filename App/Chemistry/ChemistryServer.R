@@ -1,6 +1,15 @@
 # Chemistry Server
 
 chemistryServer <- function(input, output){
+        
+        output$chemistryMashVol <- renderUI({
+                numericInput(inputId = "chemistryMashVol",label = "Mash Volume (Gal):",value = input$mashThickness*totalGrain()/4) #[Qts/Lbs]*[Lbs]*[1Gal/4Qts] = Gal
+        })
+        
+        output$chemistrySpargeVol <- renderUI({
+                numericInput(inputId = "chemistrySpargeVol",label = "Sparge Volume (Gal):",value = spargeVol()) #from water server
+        })
+        
         output$pH <- renderText({
                 estimatedPH <- 5.8 + (input$HCO3_CaCO3*0.056 - input$Ca*0.04 - input$Mg*0.033)*0.028
         })
@@ -54,14 +63,22 @@ chemistryServer <- function(input, output){
                                     filter(Grists, Ingredients == input$Ingredients4) %>% select(SRM),
                                     filter(Grists, Ingredients == input$Ingredients5) %>% select(SRM)))
                 
-                #Distilled Water Mash pH
-                distWaterMashpH <- 
+                #Mash Volume
+#                 output$chemistryMashVol <- renderText({
+#                         input$mashThickness*totalGrain()/4 #[Qts/Lbs]*[Lbs]*[1Gal/4Qts] = Gal
+#                 })
+                
+                #Sparge Volume
+#                 output$chemistrySpargeVol <- renderText({
+#                         spargeVol() #from water server 
+#                 })
                 
                 data.frame(Ingredients =ingredients, 
                            Lbs = lbs, 
                            SRM = srm,
                            EZWaterCode = ezWaterCode) %>%
                         left_join(y = grainDistpH, by = c("EZWaterCode" = "grainTypes")) %>%
-                        mutate(distWaterpH = ifelse(ezWaterCode == 10, 5.22-0.00504*srm,distWaterpH))
+                        mutate(distWaterpH = ifelse(ezWaterCode == 10, 5.22-0.00504*srm,distWaterpH)) %>%
+                        select(Ingredients,Lbs,SRM,distWaterpH)
         })
 }

@@ -24,7 +24,11 @@ waterUI <- function(){
                                              value = 1.25),
                                 numericInput(inputId = "grainAbsorptionFactor",
                                              label = "Grain Abs. Factor (Gal/Lb):",
-                                             value = .125))
+                                             value = .125),
+                                strong("Mash Volume (Gal):"),
+                                verbatimTextOutput(outputId = "waterMashVol"),
+                                strong("Sparge Volume (Gal):"),
+                                verbatimTextOutput(outputId = "waterSpargeVol"))
                               )
                       ),
                       

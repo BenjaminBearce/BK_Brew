@@ -36,6 +36,18 @@ chemistryUI <- function(){
                         )
                 ),
                 fluidRow(
+                        column(width = 2,
+#                                strong("Mash Volume (Gal):"),
+#                                verbatimTextOutput(outputId = "chemistryMashVol")
+                               uiOutput(outputId = "chemistryMashVol")
+                               ),
+                        column(width = 2,
+#                                strong("Sparge Volume (Gal):"),
+#                                verbatimTextOutput(outputId = "chemistrySpargeVol")
+                               uiOutput(outputId = "chemistrySpargeVol")
+                               )
+                ),
+                fluidRow(
                         h4("Step2: Grain Info"),
                         tableOutput(outputId = "grainInfo")
                 ),

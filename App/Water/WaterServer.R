@@ -53,6 +53,17 @@ waterServer <- function(input, output){
                 BS()
         })
         
+        output$waterMashVol <- renderText({
+                input$mashThickness*totalGrain()/4 #[Qts/Lbs]*[Lbs]*[1Gal/4Qts] = Gal
+        })
+        
+        spargeVol <<- reactive({5})
+        
+        output$waterSpargeVol <- renderText({
+                spargeVol() #Hard Coded 
+                # input$mashThickness*totalGrain()/4 #[Qts/Lbs]*[Lbs]*[1Gal/4Qts] = Gal
+        })
+        
         output$waterGraph <- renderPlot({
               
                 print("GL")
@@ -84,30 +95,14 @@ waterServer <- function(input, output){
                                               TWN()-grainLoss()-mashLoss(),
                                               TWN()-grainLoss()-mashLoss()-lauterLoss(),
                                               TWN()-grainLoss()-mashLoss()-lauterLoss()-kettleLoss()-EvL(),
-                                              TWN()-grainLoss()-mashLoss()-lauterLoss()-kettleLoss()-EvL()-fermentationLoss()))
+                                              TWN()-grainLoss()-mashLoss()-lauterLoss()-kettleLoss()-EvL()-fermentationLoss())
+                                        )
                 #class(waterData)
                 ggplot(data = waterData, aes(x,y)) +
                         geom_bar(stat = "identity", fill = I("grey50")) +
                         ggtitle("Total Water Needed")
                 
-                
-#                 waterData <- data.frame(step = 1:6,
-#                                         TWN = TWN(),
-#                                         PostMash = grainLoss,
-#                                         PostSparge = ,
-#                                         PostBoil = ,
-#                                         Cooling = ,
-#                                         Fermentation = )
-                
-                
-#                 waterData <- data.frame(step = seq(1,6), vol = c(TWN(),
-#                                                                  TWN()-grainLoss(),
-#                                                                  TWN()-grainLoss()-mashLoss(),
-#                                                                  TWN()-grainLoss()-mashLoss()-lauterLoss(),
-#                                                                  TWN()-grainLoss()-mashLoss()-lauterLoss()-kettleLoss()-EvL(),
-#                                                                  TWN()-grainLoss()-mashLoss()-lauterLoss()-kettleLoss()-EvL()-fermentationLoss()))
-#                 waterGraph <- ggplot(data = waterData, aes(step,vol))
-#                 waterGraph + ggtitle("Total Water Needed") + geom_step()
+
         })
         
 }
