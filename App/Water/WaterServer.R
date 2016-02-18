@@ -65,17 +65,17 @@ waterServer <- function(input, output){
         })
         
         output$waterGraph <- renderPlot({
-              
-                print("GL")
-                grainLoss() 
-                print("EL")
-                EL() 
-                print("BS")
-                BS() 
-                print("EvL")
-                EvL() 
-                print("TWN")
-                TWN() 
+              #Just here to see what the values are in consol
+#                 print("GL")
+#                 grainLoss() 
+#                 print("EL")
+#                 EL() 
+#                 print("BS")
+#                 BS() 
+#                 print("EvL")
+#                 EvL() 
+#                 print("TWN")
+#                 TWN() 
                 
                 waterData <- data.frame(x = factor(c("TWN",
                                                      "PostMash",
