@@ -4,29 +4,29 @@ chemistryUI <- function(){
         tabPanel("Chemistry",
                 fluidRow(
                         h4("Step1: Initial Ion Concentrations (ppm or mg/L)"),
-                        column(width = 1,
+                        column(width = 2,
                                numericInput(inputId = "Ca",
                                             label = "Ca",
                                             value =  4)
                         ),
-                        column(width = 1,
+                        column(width = 2,
                                numericInput(inputId = "Mg",
                                             label = "Mg",
                                             value =  1)
                         ),
-                        column(width = 1,
+                        column(width = 2,
                                numericInput(inputId = "Na",
                                             label = "Na",
                                             value =  32)
                         ),
-                        column(width = 1,
+                        column(width = 2,
                                numericInput(inputId = "Cl",
                                             label = "Cl",
                                             value =  27)
                         ),
-                        column(width = 1,
+                        column(width = 2,
                                numericInput(inputId = "SO4",
-                                            label = "CaCO3",
+                                            label = "SO4",
                                             value =  6)
                         ),
                         column(width = 2,
@@ -48,8 +48,45 @@ chemistryUI <- function(){
                                )
                 ),
                 fluidRow(
-                        h4("Step2: Grain Info"),
-                        tableOutput(outputId = "grainInfo")
+                        column(width = 2,
+                               numericInput(inputId = "mashPercentDistilled",label = "% Distilled",value = 0)
+                        ),
+                        column(width = 2,
+                               numericInput(inputId = "spargePercentDistilled",label = "% Distilled",value = 0)
+                               
+                        )
+                ),
+                h4("Step2: Grain Info"),
+                fluidRow(
+                        column(width = 5,
+                                tableOutput(outputId = "grainInfo")
+                        ),
+                        column(width = 1,
+                               HTML("<br>"),
+
+                               "%",
+                               HTML("<br>"),
+                               HTML("<br>"),
+                               HTML("<br>"),
+                               "oz"
+                        ),
+                        column(width = 2,
+                                numericInput(inputId = "acidulatedMaltPercent",label = "Acidulated Malt",value = 2),
+                                numericInput(inputId = "acidulatedMaltOz",label = NULL,value = 0)
+                        ),
+                        column(width = 1,
+                               HTML("<br>"),
+                               
+                               "%",
+                               HTML("<br>"),
+                               HTML("<br>"),
+                               HTML("<br>"),
+                               "ml"
+                        ),
+                        column(width = 2,
+                               numericInput(inputId = "lacticAcidPercent",label = "Lactic Acid",value = 88),
+                               numericInput(inputId = "lacticAcidml",label = NULL,value = 0)
+                        )
                 ),
                 fluidRow(
                         h4("Step3: View Mash pH"),
@@ -82,17 +119,17 @@ chemistryUI <- function(){
                                 column(width = 3,
                                        numericInput(inputId = "mashGypsum",
                                                     label = "Gypsum CaSO4",
-                                                    value =  4)
+                                                    value =  5)
                                 ),
                                 column(width = 3,
                                        numericInput(inputId = "mashCalciumChloride",
                                                     label = "Cal.Chl. CaCl2",
-                                                    value =  1)
+                                                    value =  5)
                                 ),
                                 column(width = 3,
                                        numericInput(inputId = "mashEpsomSalt",
                                                     label = "Epsom Salt MgSO4",
-                                                    value =  32)
+                                                    value =  5)
                                 )
                         ),
                         fluidRow(
@@ -144,17 +181,17 @@ chemistryUI <- function(){
                                 column(width = 3,
                                        numericInput(inputId = "mashSlakedLime",
                                                     label = "Slaked Lime Ca(OH)2",
-                                                    value =  4)
+                                                    value =  0)
                                 ),
                                 column(width = 3,
                                        numericInput(inputId = "mashBakingSoda",
                                                     label = "Baking Soda NaHCO3",
-                                                    value =  1)
+                                                    value =  0)
                                 ),
                                 column(width = 3,
                                        numericInput(inputId = "mashChalk",
                                                     label = "Chalk CaCO3",
-                                                    value =  32)
+                                                    value =  0)
                                 )
                         ),
                         fluidRow(
@@ -289,6 +326,10 @@ chemistryUI <- function(){
                                        strong("Cl/SO4"),
                                        verbatimTextOutput(outputId = "recommendedChlorideSulfate")
                                 )
+                        ),
+                        fluidRow(
+                                "*Cl/SO4",
+                                verbatimTextOutput(outputId = "Chl_SO4_Ratio_Message")
                         )
                 ) #End of wellPanel()
         )
