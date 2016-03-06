@@ -2,26 +2,10 @@
 
 mashServer <- function(input, output){
         output$mashType <- renderUI({
-                if (input$MashType1 == "Step Mash (using direct heat)") {
-                        numericInput(inputId="MashNum2",label="MashNum",value=0.0)
-                } else {
-                        numericInput(inputId="MashNum1",label="MashNum",value=0.0)
+                if(input$mashType == "Step Mash (using infusions)"){
+                        numericInput(inputId = "grainTemp1", label = "Grain Temp1", value = 70)
+                }else if(input$mashType == "Single Decoction"){
+                        numericInput(inputId = "grainTemp2", label = "Grain Temp2", value = 71)
                 }
-        })
-        
-        output$mashNum <- renderText({
-                if (input$MashType1 == "Step Mash (using direct heat)") {
-                        finNum = 2.0*input$MashNum2
-                } else {
-                        finNum = 5.0*input$MashNum1
-                }
-        })
-        
-        output$MashH20 <- renderText({
-                out1 <- input$MashThick1*10.15
-        })
-        
-        output$MashTemp <- renderText({
-                out2 <- input$ProteinRest1 - input$GrainTemp1
         })
 }
