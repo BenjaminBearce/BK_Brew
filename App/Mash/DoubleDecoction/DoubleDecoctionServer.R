@@ -1,5 +1,5 @@
 # Double Decoction Server
 
-doubleDecoctionServer <- function(){
+doubleDecoctionServer <- function(input, output){
         
 }

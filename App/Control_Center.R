@@ -5,8 +5,9 @@ library(shiny, quietly = TRUE, warn.conflicts = FALSE)
 library(RODBC, quietly = TRUE, warn.conflicts = FALSE)
 library(sqldf, quietly = TRUE, warn.conflicts = FALSE)
 library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
+library(tidyr, quietly = TRUE, warn.conflicts = FALSE)
 library(stringr, quietly = TRUE, warn.conflicts = FALSE)
-library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
+library(ggplot2, quietly = TaRUE, warn.conflicts = FALSE)
 library(shinyBS, quietly = TRUE, warn.conflicts = FALSE)
 
 

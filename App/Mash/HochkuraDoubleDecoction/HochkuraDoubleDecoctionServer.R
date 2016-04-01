@@ -1,5 +1,5 @@
 # Hochkura Double Decoction Server
 
-hochkuraDoubleDecoctionServer <- function(){
+hochkuraDoubleDecoctionServer <- function(input, output){
         
 }
