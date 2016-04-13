@@ -29,7 +29,7 @@ panelMain <- function(){
             column(width = 5, offset = 1,
                    numericInput(inputId = "kettleDeadSpace",
                                 label = "Boil Kettle Dead Space (Gal):",
-                                value = 0.0),
+                                value = 0),
                    numericInput(inputId = "lauterTunDeadSpace",
                                 label = "Lauter Tun Dead Space (Gal):",
                                 value = 0.25),

@@ -6,9 +6,7 @@ calcLbs <- function(input,ing,ingPct){
                 higherRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeHigh)) - 1)*1000
                
                 OG <- mean(c(lowerRange,higherRange)) #/1000+1
-                
-                totalGravity <- OG*input$batchSize #OG*Gal
-                
+                totalGravity <- OG*(input$batchSize+input$kettleDeadSpace+input$fermentationTankLoss) #OG*Gal #OG*Gal
                 lbs <- Grists %>% 
                         filter(Ingredients == ing) %>% 
                         mutate(IngredientGravity = ingPct/100*totalGravity) %>%
