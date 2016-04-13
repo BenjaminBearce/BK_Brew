@@ -57,7 +57,7 @@ waterServer <- function(input, output){
                 input$mashThickness*totalGrain()/4 #[Qts/Lbs]*[Lbs]*[1Gal/4Qts] = Gal
         })
         
-        spargeVol <<- reactive({5})
+        spargeVol <<- reactive({TWN()-(input$mashThickness*totalGrain()/4)})
         
         output$waterSpargeVol <- renderText({
                 spargeVol() #Hard Coded 
