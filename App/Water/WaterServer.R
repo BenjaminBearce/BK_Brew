@@ -3,7 +3,7 @@
 waterServer <- function(input, output){
         #Constants that are dynamic
         grainLoss <- reactive({
-                totalGrain()*input$grainAbsorptionFactor
+                totalGrain()*input$grainAbsorptionFactor*(1-input$shrink/100)
         })
         
         lauterLoss <- reactive({
@@ -13,7 +13,7 @@ waterServer <- function(input, output){
                 input$mashTunDeadSpace*(1-input$shrink/100)
         })
         kettleLoss <- reactive({
-                input$kettleDeadSpace*(1-input$shrink/100)
+                input$kettleDeadSpace
         })
         fermentationLoss <- reactive({
                 input$fermentationTankLoss
