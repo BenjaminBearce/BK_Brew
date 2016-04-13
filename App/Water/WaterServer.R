@@ -22,7 +22,7 @@ waterServer <- function(input, output){
                 input$batchSize      
         })
         EvL <- reactive({
-                BS()*((input$boilTime/60)*(input$evap/100)/(1-(input$boilTime/60)*(input$evap/100)))
+                (BS()+kettleLoss()+fermentationLoss())*((input$boilTime/60)*(input$evap/100)/(1-(input$boilTime/60)*(input$evap/100)))
         })
         EL <- reactive({
                 lauterLoss() + mashLoss() + kettleLoss() + fermentationLoss()
