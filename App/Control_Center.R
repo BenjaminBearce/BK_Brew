@@ -7,7 +7,7 @@ library(sqldf, quietly = TRUE, warn.conflicts = FALSE)
 library(dplyr, quietly = TRUE, warn.conflicts = FALSE)
 library(tidyr, quietly = TRUE, warn.conflicts = FALSE)
 library(stringr, quietly = TRUE, warn.conflicts = FALSE)
-library(ggplot2, quietly = TaRUE, warn.conflicts = FALSE)
+library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
 library(shinyBS, quietly = TRUE, warn.conflicts = FALSE)
 
 
@@ -41,10 +41,11 @@ source("~/Github/BK_Brew/App/Mash/SingleDecoction/SingleDecoctionUI.R", local = 
 source("~/Github/BK_Brew/App/Mash/DoubleDecoction/DoubleDecoctionUI.R", local = TRUE)
 source("~/Github/BK_Brew/App/Mash/EnhancedDoubleDecoction/EnhancedDoubleDecoctionUI.R", local = TRUE)
 source("~/Github/BK_Brew/App/Mash/HochkuraDoubleDecoction/HochkuraDoubleDecoctionUI.R", local = TRUE)
-
 source("~/Github/BK_Brew/App/Chemistry/ChemistryUI.R", local = TRUE)
 source("~/Github/BK_Brew/App/Water/WaterUI.R", local = TRUE)
 source("~/Github/BK_Brew/App/Fermentation/FermentationUI.R", local = TRUE)
+source("~/Github/BK_Brew/App/Reports/ReportsUI.R", local = TRUE)
+
 # Load Server Components --------------------
 source("~/Github/BK_Brew/App/MainPanelServer.R", local = TRUE)
 source("~/Github/BK_Brew/App/Fermentables/FermentablesServer.R", local = TRUE)
@@ -57,10 +58,10 @@ source("~/Github/BK_Brew/App/Mash/SingleDecoction/SingleDecoctionServer.R", loca
 source("~/Github/BK_Brew/App/Mash/DoubleDecoction/DoubleDecoctionServer.R", local = TRUE)
 source("~/Github/BK_Brew/App/Mash/EnhancedDoubleDecoction/EnhancedDoubleDecoctionServer.R", local = TRUE)
 source("~/Github/BK_Brew/App/Mash/HochkuraDoubleDecoction/HochkuraDoubleDecoctionServer.R", local = TRUE)
-
 source("~/Github/BK_Brew/App/Chemistry/ChemistryServer.R", local = TRUE)
 source("~/Github/BK_Brew/App/Water/WaterServer.R", local = TRUE)
 source("~/Github/BK_Brew/App/Fermentation/FermentationServer.R", local = TRUE)
+source("~/Github/BK_Brew/App/Reports/ReportsServer.R", local = TRUE)
 
 # UI --------------------
 ui <- fluidPage(
@@ -81,7 +82,9 @@ ui <- fluidPage(
                     # Water --------------------
                     waterUI(),
                     # Fermentation --------------------
-                    fermentationUI()
+                    fermentationUI(),
+                    # Reports --------------------
+                    reportsUI()
         ),
         wellPanel(style = "background-color: #0EAE20",
                   sidebarLayout(
@@ -125,6 +128,8 @@ server <- function(input, output, session){
         waterServer(input, output)
         # Fermentation Output --------------------
         fermentationServer(input, output)
+        # Reports Output --------------------
+        reportsServer(input, output)
 }
 
 # Build App --------------------

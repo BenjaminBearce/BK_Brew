@@ -65,6 +65,13 @@ fermentablesServer <- function(input, output, session){
                 
         })
         
+        OG <<- reactive({
+          lowerRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeLow)) - 1)*1000
+          higherRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeHigh)) - 1)*1000
+          
+          OG <- mean(c(lowerRange,higherRange))/1000+1
+        })
+        
         output$DPcalcVal <- renderText({as.character(DPcalc())})
         
         output$DPcalc <- renderUI({
@@ -86,22 +93,17 @@ fermentablesServer <- function(input, output, session){
         grains5 <<- reactive({calcLbs(input,input$Ingredients5,input$IngredientPercent5)})
         totalGrain <<- reactive({calcTotGrain(input)})
         
-        output$Lbs1 <- renderText({
-                as.character(round(grains1(),2))
-        })
-        output$Lbs2 <- renderText({
-                as.character(round(grains2(),2))
-        })
-        output$Lbs3 <- renderText({
-                as.character(round(grains3(),2))
-        })
-        output$Lbs4 <- renderText({
-                as.character(round(grains4(),2))
-        })
-        output$Lbs5 <- renderText({
-                as.character(round(grains5(),2))
-
-        })
+        Lbs1 <<- reactive({as.character(round(grains1(),2))})
+        Lbs2 <<- reactive({as.character(round(grains2(),2))})
+        Lbs3 <<- reactive({as.character(round(grains3(),2))})
+        Lbs4 <<- reactive({as.character(round(grains4(),2))})
+        Lbs5 <<- reactive({as.character(round(grains5(),2))})
+        
+        output$Lbs1 <- renderText({Lbs1()})
+        output$Lbs2 <- renderText({Lbs2()})
+        output$Lbs3 <- renderText({Lbs3()})
+        output$Lbs4 <- renderText({Lbs4()})
+        output$Lbs5 <- renderText({Lbs5()})
         
         output$fermentablesTotalGrain <- renderText({
                 round(totalGrain(),2)

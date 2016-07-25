@@ -53,50 +53,77 @@ hopsServer <- function(input, output, session){
         
         # Hop Utilization -----
         
+        hopsUtilization1 <<- reactive({utilization(input, input$BoilTime1, boilGravity())*100})
         output$hopsUtilization1 <- renderText({
-                utilization(input, input$BoilTime1, boilGravity())*100
+                hopsUtilization1()        
                 
         })
+        hopsUtilization2 <<- reactive({utilization(input, input$BoilTime2, boilGravity())*100})
         output$hopsUtilization2 <- renderText({
-                utilization(input, input$BoilTime2, boilGravity())*100
+                hopsUtilization2()        
+                
         })
+        hopsUtilization3 <<- reactive({utilization(input, input$BoilTime3, boilGravity())*100})
         output$hopsUtilization3 <- renderText({
-                utilization(input, input$BoilTime3, boilGravity())*100
+                hopsUtilization3()        
+                
         })
+        hopsUtilization4 <<- reactive({utilization(input, input$BoilTime4, boilGravity())*100})
         output$hopsUtilization4 <- renderText({
-                utilization(input, input$BoilTime4, boilGravity())*100
+                hopsUtilization4()        
+                
         })
+        hopsUtilization5 <<- reactive({utilization(input, input$BoilTime5, boilGravity())*100})
         output$hopsUtilization5 <- renderText({
-                utilization(input, input$BoilTime5, boilGravity())*100
+                hopsUtilization5()        
                 
         })
         
         # Hop IBU -----
         
-        output$hopsIBU1 <- renderText({
-                #AAU alpha acid units
+        IBU1 <<- reactive({
                 AUU <- input$AlphaAcid1/100*input$Weight1
-                utilization(input, input$BoilTime1, boilGravity())*AUU*7489/input$batchSize
+                IBU1 <- utilization(input, input$BoilTime1, boilGravity())*AUU*7489/input$batchSize
+        })
+        
+        IBU2 <<- reactive({
+                AUU <- input$AlphaAcid2/100*input$Weight2
+                IBU2 <- utilization(input, input$BoilTime2, boilGravity())*AUU*7489/input$batchSize
+        })
+        
+        IBU3 <<- reactive({
+                AUU <- input$AlphaAcid3/100*input$Weight3
+                IBU3 <- utilization(input, input$BoilTime3, boilGravity())*AUU*7489/input$batchSize
+        })
+        
+        IBU4 <<- reactive({
+                AUU <- input$AlphaAcid4/100*input$Weight4
+                IBU4 <- utilization(input, input$BoilTime4, boilGravity())*AUU*7489/input$batchSize
+        })
+        
+        IBU5 <<- reactive({
+                AUU <- input$AlphaAcid5/100*input$Weight5
+                IBU5 <- utilization(input, input$BoilTime5, boilGravity())*AUU*7489/input$batchSize
+        })
+        
+        Total_IBU <<- reactive({
+          Total_IBU <- IBU1()+IBU2()+IBU3()+IBU4()+IBU5()
+        })
+        
+        output$hopsIBU1 <- renderText({
+                IBU1()
         })
         output$hopsIBU2 <- renderText({
-                #AAU alpha acid units
-                AUU <- input$AlphaAcid2/100*input$Weight2
-                utilization(input, input$BoilTime2, boilGravity())*AUU*7489/input$batchSize
+                IBU2()
         })
         output$hopsIBU3 <- renderText({
-                #AAU alpha acid units
-                AUU <- input$AlphaAcid3/100*input$Weight3
-                utilization(input, input$BoilTime3, boilGravity())*AUU*7489/input$batchSize
+                IBU3()
         })
         output$hopsIBU4 <- renderText({
-                #AAU alpha acid units
-                AUU <- input$AlphaAcid4/100*input$Weight4
-                utilization(input, input$BoilTime4, boilGravity())*AUU*7489/input$batchSize
+                IBU4()
         })
         output$hopsIBU5 <- renderText({
-                #AAU alpha acid units
-                AUU <- input$AlphaAcid5/100*input$Weight5
-                utilization(input, input$BoilTime5, boilGravity())*AUU*7489/input$batchSize
+                IBU5()
         })
         
 #         utilization <- reactive({

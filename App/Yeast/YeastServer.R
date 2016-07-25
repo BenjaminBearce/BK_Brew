@@ -21,21 +21,26 @@ whileLoop <- function(input, currentCellCount, desiredCells, totalVol, nextVol){
 
 yeastServer <- function(input, output, session){
        
+        attenuation <<- reactive({filter(Yeast, YeastStrain == input$Yeast) %>% select(ATT)})
         output$attenuation <- renderUI({
                 numericInput(inputId = "attenuation",
                              label = "Attenuation (%)",
-                             value = filter(Yeast, YeastStrain == input$Yeast) %>% select(ATT))
+                             value = attenuation())
+        })
+        
+        ABV <<- reactive({
+          #Calc OG
+          lowerRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeLow)) - 1)*1000
+          higherRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeHigh)) - 1)*1000
+          
+          OG <- mean(c(lowerRange,higherRange))/1000 + 1
+          ATT <- input$attenuation
+          FG <- OG-(ATT/100)*(OG-1)
+          ABV = (1.05/0.79)*((OG-FG)/FG)*100
         })
         
         output$ABV <- renderText({
-                #Calc OG
-                lowerRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeLow)) - 1)*1000
-                higherRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeHigh)) - 1)*1000
-                
-                OG <- mean(c(lowerRange,higherRange))/1000 + 1
-                ATT <- input$attenuation
-                FG <- OG-(ATT/100)*(OG-1)
-                ABV = (1.05/0.79)*((OG-FG)/FG)*100
+          ABV()
         })
         
         output$FG <- renderUI({
@@ -52,6 +57,17 @@ yeastServer <- function(input, output, session){
                              value = FG)
         })
         
+        FG <<- reactive ({
+          #Calc OG
+          lowerRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeLow)) - 1)*1000
+          higherRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeHigh)) - 1)*1000
+          
+          OG <- mean(c(lowerRange,higherRange))/1000 + 1
+          ATT <- input$attenuation
+          FG <- OG-(ATT/100)*(OG-1)
+          
+        })
+        
         output$FGRange <- renderText({
                 #Calc Gravity Range
                 lowerRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeLow)) - 1)*1000
@@ -60,7 +76,7 @@ yeastServer <- function(input, output, session){
                 paste(lowerRange/1000+1,"-",higherRange/1000+1)
         })
         
-        cellsNeeded <- reactive({
+        cellsNeeded <<- reactive({
                 #Calc OG
                 lowerRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeLow)) - 1)*1000
                 higherRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeHigh)) - 1)*1000
@@ -76,7 +92,7 @@ yeastServer <- function(input, output, session){
         
         output$cellsNeeded <- renderText({cellsNeeded()/1e9}) #show in Billions
         
-        litersNeeded <- reactive({
+        litersNeeded <<- reactive({
                 desiredCells <- cellsNeeded()
                 startingCells <- input$startYeastCells*1e9
                 currentCellCount <- startingCells

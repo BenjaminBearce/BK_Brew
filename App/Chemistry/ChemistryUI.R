@@ -219,15 +219,15 @@ chemistryUI <- function(){
                                        h4("(grams)")
                                 ),
                                 column(width = 3,
-                                       strong("Gypsum CaSO4"),
+                                       strong("Slaked Lime Ca(OH)2"),
                                        verbatimTextOutput(outputId = "spargeSlakedLime")
                                 ),
                                 column(width = 3,
-                                       strong("Cal.Chl. CaCl2"),
+                                       strong("Baking Soda NaHCO3"),
                                        verbatimTextOutput(outputId = "spargeBakingSoda")
                                 ),
                                 column(width = 3,
-                                       strong("Epsom Salt MgSO4"),
+                                       strong("Chalk CaCO3"),
                                        verbatimTextOutput(outputId = "spargeChalk")
                                 )
                         )

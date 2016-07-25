@@ -21,7 +21,7 @@ panelMain <- function(){
                                 value = 4),
                    numericInput(inputId = "sysEfficiency",
                                 label = "Brew House Efficiency (%)",
-                                value = 70),
+                                value = 73.5),
                    numericInput(inputId = "scaleRecipe",
                                 label = "Scale Current Recipe (%)",
                                 value = 100)

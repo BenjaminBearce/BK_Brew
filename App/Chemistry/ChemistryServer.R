@@ -83,7 +83,7 @@ chemistryServer <- function(input, output){
         output$grainInfo <- renderTable({grainInfo()})
         ### Step 3 Variables and Output -----
         
-        effAlkalinity <- reactive({
+        effAlkalinity <<- reactive({
                 if("Not Bicarbonate" == "Bicarbonate"){ratio = 56/61}else if("Alkalinity" == "Alkalinity"){ratio = 1}
                 #(1-%Distilled)*(HCO3 or CaCO3) #ppm
                 (1)*input$HCO3_CaCO3*ratio+ 
@@ -112,12 +112,12 @@ chemistryServer <- function(input, output){
 
                
         })
-        resAlkalinity <- reactive({
+        resAlkalinity <<- reactive({
                  effAlkalinity() - ((mashCa()/1.4)+(mashMg()/1.7)) #ppm
         })
         output$resAlkalinity <- renderText({resAlkalinity()})
         
-        output$pH <- renderText({
+        pH <<- reactive({
                 #as.numeric(sum(grainInfo()$Lbs))
                 pH <- grainInfo() %>%
                         mutate(Lbs_x_distWaterPH = Lbs*distWaterpH) %>%
@@ -128,15 +128,16 @@ chemistryServer <- function(input, output){
                 #estimatedPH <- estimatedPH[complete.cases(estimatedPH),]
                 
                 #select(estimatedPH,Lbs_x_distWaterPH) %>% sum() %>% as.numeric()
-#                         mutate(Lbs_x_distWaterPH = Lbs*distWaterpH) %>%
-#                         select(Lbs_x_distWaterPH) %>%
-#                         sum() %>% as.numeric()
-#                 estimatedPH <- sum(estimatedPH$Lbs_x_distWaterPH)/sum(estimatedPH$Lbs)+
-#                                (0.1085*input$chemistryMashVol/sum(estimatedPH$Lbs)+0.013)*
-#                                resAlkalinity()/50 
-                
+                #                         mutate(Lbs_x_distWaterPH = Lbs*distWaterpH) %>%
+                #                         select(Lbs_x_distWaterPH) %>%
+                #                         sum() %>% as.numeric()
+                #                 estimatedPH <- sum(estimatedPH$Lbs_x_distWaterPH)/sum(estimatedPH$Lbs)+
+                #                                (0.1085*input$chemistryMashVol/sum(estimatedPH$Lbs)+0.013)*
+                #                                resAlkalinity()/50 
                 
         })
+        
+        output$pH <- renderText({pH()})
         
         output$pHSuggestion <- renderText({
                 "5.4 - 5.6"
