@@ -6,17 +6,29 @@
 suppressWarnings(suppressMessages(library(gdata))) #Suppress loading info on Excel reading package
 suppressWarnings(suppressMessages(library(sqldf)))
 
-setwd("C:/Users/Benjamin/Documents/GitHub/BK_Brew/Database")
-Grains_Info <- read.xls("Brewing_Constants.xlsx",sheet = "Grains", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
-Extracts_Info <- read.xls("Brewing_Constants.xlsx",sheet = "Extracts", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
-Adjuncts_Info <- read.xls("Brewing_Constants.xlsx",sheet = "Adjuncts", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
-Hops_Info   <- read.xls("Brewing_Constants.xlsx",sheet = "Hops", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
-Yeast_Info  <- read.xls("Brewing_Constants.xlsx",sheet = "Yeast", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
-Style_Info  <- read.xls("Brewing_Constants.xlsx",sheet = "Styles", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
-Spices_Info  <- read.xls("Brewing_Constants.xlsx",sheet = "Spices", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
-SystemSpecific_Info  <- read.xls("Brewing_Constants.xlsx",sheet = "SystemSpecificInformation", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
-Gravity_Correction_Info  <- read.xls("Brewing_Constants.xlsx",sheet = "Gravity_Correction_Chart", stringsAsFactors = F, perl="C:/Strawberry/perl/bin/perl.exe")
 
+Grains_Info <- read.xls("Brewing_Constants.xlsx",sheet = "Grains", stringsAsFactors = F)#, perl="C:/Strawberry/perl/bin/perl.exe")
+Extracts_Info <- read.xls("Brewing_Constants.xlsx",sheet = "Extracts", stringsAsFactors = F)#, perl="C:/Strawberry/perl/bin/perl.exe")
+Adjuncts_Info <- read.xls("Brewing_Constants.xlsx",sheet = "Adjuncts", stringsAsFactors = F)#, perl="C:/Strawberry/perl/bin/perl.exe")
+Hops_Info   <- read.xls("Brewing_Constants.xlsx",sheet = "Hops", stringsAsFactors = F)#, perl="C:/Strawberry/perl/bin/perl.exe")
+Yeast_Info  <- read.xls("Brewing_Constants.xlsx",sheet = "Yeast", stringsAsFactors = F)#, perl="C:/Strawberry/perl/bin/perl.exe")
+Style_Info  <- read.xls("Brewing_Constants.xlsx",sheet = "Styles", stringsAsFactors = F)#, perl="C:/Strawberry/perl/bin/perl.exe")
+Spices_Info  <- read.xls("Brewing_Constants.xlsx",sheet = "Spices", stringsAsFactors = F)#, perl="C:/Strawberry/perl/bin/perl.exe")
+SystemSpecific_Info  <- read.xls("Brewing_Constants.xlsx",sheet = "SystemSpecificInformation", stringsAsFactors = F)#, perl="C:/Strawberry/perl/bin/perl.exe")
+Gravity_Correction_Info  <- read.xls("Brewing_Constants.xlsx",sheet = "Gravity_Correction_Chart", stringsAsFactors = F)#, perl="C:/Strawberry/perl/bin/perl.exe")
+
+setwd("Brewing_Constants")
+Grains_Info <- read.csv(file = "grains.csv",header = T,stringsAsFactors = F)
+Extracts_Info <- read.csv(file = "extracts.csv",header = T,stringsAsFactors = F)
+Adjuncts_Info <- read.csv(file = "adjuncts.csv",header = T,stringsAsFactors = F)
+Hops_Info   <- read.csv(file = "hops.csv",header = T,stringsAsFactors = F)
+Yeast_Info  <- read.csv(file = "yeast.csv",header = T,stringsAsFactors = F)
+Style_Info  <- read.csv(file = "styles.csv",header = T,stringsAsFactors = F)
+Spices_Info  <- read.csv(file = "spices.csv",header = T,stringsAsFactors = F)
+SystemSpecific_Info  <- read.csv(file = "systemSpecificInformation.csv",header = T,stringsAsFactors = F)
+Gravity_Correction_Info  <- read.csv(file = "gravityCorrectionChart.csv",header = T,stringsAsFactors = F)
+
+setwd("../")
 dbIngredients <- dbConnect(SQLite(), dbname="Ingredients.sqlite")
 
 #Load in *.csv data to Ingredients Database

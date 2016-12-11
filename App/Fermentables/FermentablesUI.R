@@ -3,24 +3,24 @@
 fermentablesUI <- function(){
         tabPanel("Fermentables",
                  HTML("<br>"),
-                 fluidRow(
-                         column(width = 4,
-                                selectInput(inputId = "DPcheck",
-                                            label = "Fermentables Difficulty",
-                                            choices = c("Default","Advanced")),
-                                bsTooltip("DPcheck","Advanced will alert user when Diastatic Power is too low for self conversion","top","hover focus")
-                         ),
-                         column(width = 4,
-                                uiOutput("DPcalc")
-                         ),
-                         column(width = 4,
-                                uiOutput("DPalert"))
-                 ),
+#                  fluidRow(
+#                          column(width = 4,
+#                                 selectInput(inputId = "DPcheck",
+#                                             label = "Fermentables Difficulty",
+#                                             choices = c("Default","Advanced")),
+#                                 bsTooltip("DPcheck","Advanced will alert user when Diastatic Power is too low for self conversion","top","hover focus")
+#                          ),
+#                          column(width = 4,
+#                                 uiOutput("DPcalc")
+#                          ),
+#                          column(width = 4,
+#                                 uiOutput("DPalert"))
+#                  ),
                  fluidRow(
                          column(width = 4,
                                 selectInput(inputId = "Ingredients1",
                                             label = "Ingredients",
-                                            choices =  c(Grains$Ingredients, Extracts$Ingredients, Adjuncts$Ingredients))
+                                            choices =  c(Grists$Ingredients))
                          ),
                          column(width = 2,
                                 numericInput(inputId = "IngredientPercent1",

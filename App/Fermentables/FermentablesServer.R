@@ -1,6 +1,6 @@
 calcLbs <- function(input,ing,ingPct){
         
-        if (ing != " None") {
+        if (ing != "0 - None") {
 
                 lowerRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeLow)) - 1)*1000
                 higherRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeHigh)) - 1)*1000
@@ -11,10 +11,20 @@ calcLbs <- function(input,ing,ingPct){
                         filter(Ingredients == ing) %>% 
                         mutate(IngredientGravity = ingPct/100*totalGravity) %>%
                         mutate(lbsNeeded = IngredientGravity/((PPG-1)*1000*input$sysEfficiency/100)) %>%
-                        select(lbsNeeded)
+                        select(lbsNeeded)# %>% as.numeric()
+                
+#                 print(ing)
+#                 print(ingPct)
+#                 print(lowerRange)
+#                 print(higherRange)
+#                 print(OG)
+#                 print(totalGravity)
+#                 print(lbs)
+                # lbs$lbsNeeded
         } else {
                 lbs <- 0
         }
+        
 }
 
 calcTotGrain <- function(input){
@@ -32,67 +42,76 @@ calcTotGrain <- function(input){
 # Fermentables Server
 
 fermentablesServer <- function(input, output, session){
-        DPcalc <- reactive({
-                
-
-                DPnum <- as.numeric((Grists %>% filter(Ingredients == input$Ingredients1) %>% mutate(DP1=DP*isGrain*grains1()) %>% select(DP1)) +
-                                             (Grists %>% filter(Ingredients == input$Ingredients2) %>% mutate(DP2=DP*isGrain*grains2()) %>% select(DP2)) +
-                                             (Grists %>% filter(Ingredients == input$Ingredients3) %>% mutate(DP3=DP*isGrain*grains3()) %>% select(DP3)) +
-                                             (Grists %>% filter(Ingredients == input$Ingredients4) %>% mutate(DP4=DP*isGrain*grains4()) %>% select(DP4)) +
-                                             (Grists %>% filter(Ingredients == input$Ingredients5) %>% mutate(DP5=DP*isGrain*grains5()) %>% select(DP5)))
-                DPden <- as.numeric((Grists %>% filter(Ingredients == input$Ingredients1) %>% select(isGrain)*grains1()) +
-                                             (Grists %>% filter(Ingredients == input$Ingredients2) %>% select(isGrain)*grains2()) +
-                                             (Grists %>% filter(Ingredients == input$Ingredients3) %>% select(isGrain)*grains3()) +
-                                             (Grists %>% filter(Ingredients == input$Ingredients4) %>% select(isGrain)*grains4()) +
-                                             (Grists %>% filter(Ingredients == input$Ingredients5) %>% select(isGrain)*grains5()))
-
-                
-                DP <- DPnum/DPden
-                
-                sumIngPct <- input$IngredientPercent1+input$IngredientPercent2+input$IngredientPercent3+input$IngredientPercent4+input$IngredientPercent5
-                
-                if (input$DPcheck == "Advanced" & DPnum > 0 & DP < 35.0 & is.finite(DP) & sumIngPct == 100) {
-                        createAlert(session,"DPalert","DPalert1",content="DP is below 35 Linter and needs to be higher, in order for full self conversion of the mash. Add more base malt.")
-                } else if (input$DPcheck == "Advanced") {
-                        closeAlert(session,"DPalert1")
-                }
-                
-                if (is.finite(DP)) {
-                        return(DP)
-                } else {
-                        return(0)
-                }
-                
-        })
+#         DPcalc <- reactive({
+#                 
+# 
+#                 DPnum <- as.numeric((Grists %>% filter(Ingredients == input$Ingredients1) %>% mutate(DP1=DP*isGrain*grains1()) %>% select(DP1)) +
+#                                              (Grists %>% filter(Ingredients == input$Ingredients2) %>% mutate(DP2=DP*isGrain*grains2()) %>% select(DP2)) +
+#                                              (Grists %>% filter(Ingredients == input$Ingredients3) %>% mutate(DP3=DP*isGrain*grains3()) %>% select(DP3)) +
+#                                              (Grists %>% filter(Ingredients == input$Ingredients4) %>% mutate(DP4=DP*isGrain*grains4()) %>% select(DP4)) +
+#                                              (Grists %>% filter(Ingredients == input$Ingredients5) %>% mutate(DP5=DP*isGrain*grains5()) %>% select(DP5)))
+#                 DPden <- as.numeric((Grists %>% filter(Ingredients == input$Ingredients1) %>% select(isGrain)*grains1()) +
+#                                              (Grists %>% filter(Ingredients == input$Ingredients2) %>% select(isGrain)*grains2()) +
+#                                              (Grists %>% filter(Ingredients == input$Ingredients3) %>% select(isGrain)*grains3()) +
+#                                              (Grists %>% filter(Ingredients == input$Ingredients4) %>% select(isGrain)*grains4()) +
+#                                              (Grists %>% filter(Ingredients == input$Ingredients5) %>% select(isGrain)*grains5()))
+# 
+#                 
+#                 DP <- DPnum/DPden
+#                 
+#                 sumIngPct <- input$IngredientPercent1+input$IngredientPercent2+input$IngredientPercent3+input$IngredientPercent4+input$IngredientPercent5
+#                 
+#                 if (input$DPcheck == "Advanced" & DPnum > 0 & DP < 35.0 & is.finite(DP) & sumIngPct == 100) {
+#                         createAlert(session,"DPalert","DPalert1",content="DP is below 35 Linter and needs to be higher, in order for full self conversion of the mash. Add more base malt.")
+#                 } else if (input$DPcheck == "Advanced") {
+#                         closeAlert(session,"DPalert1")
+#                 }
+#                 
+#                 if (is.finite(DP)) {
+#                         return(DP)
+#                 } else {
+#                         return(0)
+#                 }
+#                 
+#         })
         
         OG <<- reactive({
           lowerRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeLow)) - 1)*1000
           higherRange <- (as.numeric(subset(Styles, Styles == input$Style, select = OGRangeHigh)) - 1)*1000
-          
+#           print(input$Style)
+#           print((as.numeric(subset(Styles, Styles == input$Style, select = OGRangeLow)) - 1)*1000)
           OG <- mean(c(lowerRange,higherRange))/1000+1
         })
         
-        output$DPcalcVal <- renderText({as.character(DPcalc())})
+#        output$DPcalcVal <- renderText({as.character(DPcalc())})
         
-        output$DPcalc <- renderUI({
-                if (input$DPcheck == "Advanced") {
-                        fluidRow(column(width=12,strong("Diastatic Power [\u00B0L]"),verbatimTextOutput("DPcalcVal")))
-                }
-        })
+#         output$DPcalc <- renderUI({
+#                 if (input$DPcheck == "Advanced") {
+#                         fluidRow(column(width=12,strong("Diastatic Power [\u00B0L]"),verbatimTextOutput("DPcalcVal")))
+#                 }
+#         })
+#         
+#         output$DPalert <- renderUI({
+#                 if (input$DPcheck == "Advanced") {
+#                         fluidRow(column(width=12,strong(" "),bsAlert("DPalert")))
+#                 }
+#         })
         
-        output$DPalert <- renderUI({
-                if (input$DPcheck == "Advanced") {
-                        fluidRow(column(width=12,strong(" "),bsAlert("DPalert")))
-                }
-        })
         
         grains1 <<- reactive({calcLbs(input,input$Ingredients1,input$IngredientPercent1)})
         grains2 <<- reactive({calcLbs(input,input$Ingredients2,input$IngredientPercent2)})
         grains3 <<- reactive({calcLbs(input,input$Ingredients3,input$IngredientPercent3)})
         grains4 <<- reactive({calcLbs(input,input$Ingredients4,input$IngredientPercent4)})
         grains5 <<- reactive({calcLbs(input,input$Ingredients5,input$IngredientPercent5)})
+        
+
         totalGrain <<- reactive({calcTotGrain(input)})
         
+        Lbs2 <<- reactive({5})
+        Lbs3 <<- reactive({5})
+        Lbs4 <<- reactive({5})
+        Lbs5 <<- reactive({5})
+         
         Lbs1 <<- reactive({as.character(round(grains1(),2))})
         Lbs2 <<- reactive({as.character(round(grains2(),2))})
         Lbs3 <<- reactive({as.character(round(grains3(),2))})

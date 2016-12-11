@@ -1,5 +1,3 @@
-library(shiny)
-
 # Load Data --------------------
 library(shiny, quietly = TRUE, warn.conflicts = FALSE)
 library(RODBC, quietly = TRUE, warn.conflicts = FALSE)
@@ -11,13 +9,13 @@ library(ggplot2, quietly = TRUE, warn.conflicts = FALSE)
 library(shinyBS, quietly = TRUE, warn.conflicts = FALSE)
 
 
-setwd("~/Github/BK_Brew/Database") #Change directory to Brewing directory
+setwd("Database") #Change directory to Brewing directory
 db <- dbConnect(SQLite(), dbname="Ingredients.sqlite")
 Grains <- dbReadTable(db, "Grains")
 Grains <- Grains[order(Grains$Ingredients),]
 Extracts <- dbReadTable(db, "Extracts")
 Adjuncts <- dbReadTable(db, "Adjuncts")
-Grists <- rbind(Grains,Extracts,Adjuncts)
+Grists <- rbind(Grains,Extracts,Adjuncts) %>% arrange(Ingredients)
 Hops <- dbReadTable(db, "Hops")
 Spices <- dbReadTable(db, "Spices")
 Yeast <- dbReadTable(db, "Yeast")
@@ -27,41 +25,41 @@ db <-  dbConnect(SQLite(), dbname="BKBrewHouse.sqlite")
 GravityVersusTemp <-  dbReadTable(db, "GravityCorrectionChart")
 closeAllConnections()
 
-setwd("~/Github/BK_Brew/App") #Change directory to App
+setwd("../App") #Change directory to App
 # Load UI Components --------------------
-source("~/Github/BK_Brew/App/SidePanel.R", local = TRUE)
-source("~/Github/BK_Brew/App/MainPanelUI.R", local = TRUE)
-source("~/Github/BK_Brew/App/Fermentables/FermentablesUI.R", local = TRUE)
-source("~/Github/BK_Brew/App/Yeast/YeastUI.R", local = TRUE)
-source("~/Github/BK_Brew/App/Hops/HopsUI.R", local = TRUE)
+source("SidePanel.R", local = TRUE)
+source("MainPanelUI.R", local = TRUE)
+source("Fermentables/FermentablesUI.R", local = TRUE)
+source("Yeast/YeastUI.R", local = TRUE)
+source("Hops/HopsUI.R", local = TRUE)
 #mash
-source("~/Github/BK_Brew/App/Mash/MashUI.R", local = TRUE)
-source("~/Github/BK_Brew/App/Mash/StepMash/StepMashUI.R", local = TRUE)
-source("~/Github/BK_Brew/App/Mash/SingleDecoction/SingleDecoctionUI.R", local = TRUE)
-source("~/Github/BK_Brew/App/Mash/DoubleDecoction/DoubleDecoctionUI.R", local = TRUE)
-source("~/Github/BK_Brew/App/Mash/EnhancedDoubleDecoction/EnhancedDoubleDecoctionUI.R", local = TRUE)
-source("~/Github/BK_Brew/App/Mash/HochkuraDoubleDecoction/HochkuraDoubleDecoctionUI.R", local = TRUE)
-source("~/Github/BK_Brew/App/Chemistry/ChemistryUI.R", local = TRUE)
-source("~/Github/BK_Brew/App/Water/WaterUI.R", local = TRUE)
-source("~/Github/BK_Brew/App/Fermentation/FermentationUI.R", local = TRUE)
-source("~/Github/BK_Brew/App/Reports/ReportsUI.R", local = TRUE)
+source("Mash/MashUI.R", local = TRUE)
+source("Mash/StepMash/StepMashUI.R", local = TRUE)
+source("Mash/SingleDecoction/SingleDecoctionUI.R", local = TRUE)
+source("Mash/DoubleDecoction/DoubleDecoctionUI.R", local = TRUE)
+source("Mash/EnhancedDoubleDecoction/EnhancedDoubleDecoctionUI.R", local = TRUE)
+source("Mash/HochkuraDoubleDecoction/HochkuraDoubleDecoctionUI.R", local = TRUE)
+source("Chemistry/ChemistryUI.R", local = TRUE)
+source("Water/WaterUI.R", local = TRUE)
+source("Fermentation/FermentationUI.R", local = TRUE)
+source("Reports/ReportsUI.R", local = TRUE)
 
 # Load Server Components --------------------
-source("~/Github/BK_Brew/App/MainPanelServer.R", local = TRUE)
-source("~/Github/BK_Brew/App/Fermentables/FermentablesServer.R", local = TRUE)
-source("~/Github/BK_Brew/App/Yeast/YeastServer.R", local = TRUE)
-source("~/Github/BK_Brew/App/Hops/HopsServer.R", local = TRUE)
+source("MainPanelServer.R", local = TRUE)
+source("Fermentables/FermentablesServer.R", local = TRUE)
+source("Yeast/YeastServer.R", local = TRUE)
+source("Hops/HopsServer.R", local = TRUE)
 #mash
-source("~/Github/BK_Brew/App/Mash/MashServer.R", local = TRUE)
-source("~/Github/BK_Brew/App/Mash/StepMash/StepMashServer.R", local = TRUE)
-source("~/Github/BK_Brew/App/Mash/SingleDecoction/SingleDecoctionServer.R", local = TRUE)
-source("~/Github/BK_Brew/App/Mash/DoubleDecoction/DoubleDecoctionServer.R", local = TRUE)
-source("~/Github/BK_Brew/App/Mash/EnhancedDoubleDecoction/EnhancedDoubleDecoctionServer.R", local = TRUE)
-source("~/Github/BK_Brew/App/Mash/HochkuraDoubleDecoction/HochkuraDoubleDecoctionServer.R", local = TRUE)
-source("~/Github/BK_Brew/App/Chemistry/ChemistryServer.R", local = TRUE)
-source("~/Github/BK_Brew/App/Water/WaterServer.R", local = TRUE)
-source("~/Github/BK_Brew/App/Fermentation/FermentationServer.R", local = TRUE)
-source("~/Github/BK_Brew/App/Reports/ReportsServer.R", local = TRUE)
+source("Mash/MashServer.R", local = TRUE)
+source("Mash/StepMash/StepMashServer.R", local = TRUE)
+source("Mash/SingleDecoction/SingleDecoctionServer.R", local = TRUE)
+source("Mash/DoubleDecoction/DoubleDecoctionServer.R", local = TRUE)
+source("Mash/EnhancedDoubleDecoction/EnhancedDoubleDecoctionServer.R", local = TRUE)
+source("Mash/HochkuraDoubleDecoction/HochkuraDoubleDecoctionServer.R", local = TRUE)
+source("Chemistry/ChemistryServer.R", local = TRUE)
+source("Water/WaterServer.R", local = TRUE)
+source("Fermentation/FermentationServer.R", local = TRUE)
+source("Reports/ReportsServer.R", local = TRUE)
 
 # UI --------------------
 ui <- fluidPage(
@@ -133,7 +131,8 @@ server <- function(input, output, session){
 }
 
 # Build App --------------------
-runApp(shinyApp(ui = ui, server = server), launch.browser = TRUE)
+#runApp(shinyApp(ui = ui, server = server), launch.browser = TRUE)
+shinyApp(ui = ui, server = server)
 
 
 

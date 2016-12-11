@@ -1,7 +1,7 @@
 # Saving and Loading functions...Reports Server is down below them
 
 library(RSQLite)
-sqlitePath <- "C:/Users/Benjamin/Documents/GitHub/BK_Brew/Database/Recipes.sqlite"
+sqlitePath <- "../../Database/Recipes.sqlite"
 
 saveData <- function(data,table) {
   # Connect to the database

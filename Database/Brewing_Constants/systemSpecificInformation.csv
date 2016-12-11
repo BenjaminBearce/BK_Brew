@@ -1,0 +1,2 @@
+BatchSize[Gal],EvapRate[Percent_per_hr],ShrinkageFromCooling[Percent],BrewHouseEfficiency[Percent],WeightOfMashTun[lb],ThermalMassOfMAshTun[btu_per_(lb*DegreeF)],BoilKettleDeadSpace[Gal],LauterTunDeadSpace[Gal]
+5.5,5,4,70,7.5,0.38,0.5,0.5

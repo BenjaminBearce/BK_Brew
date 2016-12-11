@@ -11,9 +11,9 @@ reportsUI <- function(){
         	        column(width = 4,
         	               h4("Predicted:"),
         	               fluidRow(
-        	                 fluidRow(column(width = 1),column(uiOutput("reportPredictedOG"), width = 4),column(uiOutput("reportPredictedFG"), width = 3)),
-        	                 fluidRow(column(width = 1),column(uiOutput("reportPredictedABV"), width = 4),column(uiOutput("reportPredictedIBU"), width = 3)),
-        	                 fluidRow(column(width = 1),column(uiOutput("reportPredictedSRM"), width = 7))
+        	               fluidRow(column(width = 1),column(uiOutput("reportPredictedOG"), width = 4),column(uiOutput("reportPredictedFG"), width = 3)),
+        	               fluidRow(column(width = 1),column(uiOutput("reportPredictedABV"), width = 4),column(uiOutput("reportPredictedIBU"), width = 3)),
+        	               fluidRow(column(width = 1),column(uiOutput("reportPredictedSRM"), width = 7))
         	               ),
         	               h4("Actual:"),
         	               fluidRow(
